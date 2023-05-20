@@ -1,2 +1,2 @@
-# GPTWelcomer
-GPTWelcomer
+# gpt-welcomer
+gpt-welcomer
