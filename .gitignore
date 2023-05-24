@@ -1,0 +1,7 @@
+# .gitignore
+/.git
+/.phpunit.result.cache
+/phpunit.xml.bak
+/.env
+/vendor
+/bin

@@ -1,0 +1,56 @@
+# Japanese translations for dev package.
+# Copyright (C) 2023 THE dev'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the dev package.
+# root <dahara111@webbigdata.jp>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dev 3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-24 15:49+0900\n"
+"PO-Revision-Date: 2023-05-24 17:54+0900\n"
+"Last-Translator: root <dahara111@webbigdata.jp>\n"
+"Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# explanation of this plugun.
+msgid "This plugin welcomes users using chatGPT's web browsing plugin and encourages users to visit your website."
+msgstr "このプラグインはChatGPTのウェブブラウジング機能を使っているユーザーを歓>迎し、Webサイトへの訪問を促します。"
+
+# This is the explanation for the ChatGPT bot
+msgid "bot_explain_ChatGPT"
+msgstr "ChatGPTはOpenAIが提供する会話型AIです。ブラウジング機能を使うとAIがWebサイトの情報を読み込んで回答するので、人間がWebサイトに訪問する必要がなくなります。"
+
+#. This is the explanation for the Bingbot bot
+msgid "bot_explain_Bingbot"
+msgstr "BingbotはMicroSoftが提供するAI検索です。AI検索とはAIを使って様々なWebサイトの情報を無断で組み合わせて回答し、広告収入を独占するビジネスモデルです。"
+
+#. This is the explanation for the CommonCrawl bot
+msgid "bot_explain_CommonCrawl"
+msgstr "CommonCrawlが収集したデータは営利目的を含む様々なAIを学習させる際に使われます。これらの営利目的のAIからWebサイト運営者に収益が分配される事はありません"
+
+#: gpt-welcomer.php:90
+#, php-format
+msgid "最新の情報について私達のWebサイトを是非ともご訪問ください。%s%s:%s%s."
+msgstr ""
+
+#: gpt-welcomer.php:103
+msgid "Settings"
+msgstr "設定"
+
+#: gpt-welcomer.php:123
+msgid " Settings"
+msgstr "設定"
+
+#: gpt-welcomer.php:131
+msgid " Status (0-5)"
+msgstr "状態"
+
+#: gpt-welcomer.php:142
+msgid "This is the settings section for "
+msgstr "以下のボットに対する設定です："
+

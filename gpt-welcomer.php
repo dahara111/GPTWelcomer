@@ -2,7 +2,7 @@
 /*
 Plugin Name: gpt-welcomer
 Plugin URI: https://github.com/dahara111/gpt-welcomer
-Description: This plugin welcomes users using chatGPT's web browsing plugin and encourages users to visit your website.
+Description: 'This plugin welcomes users using chatGPT's web browsing plugin and encourages users to visit your website.
 Version: 1.0.0
 Author: dahara111
 Author URI: https://github.com/dahara111/
@@ -11,34 +11,32 @@ Text Domain: gpt-welcomer
 Domain Path: /languages
 */
 
+require_once 'vendor/autoload.php';
+require_once plugin_dir_path(__FILE__) . 'UserAgent.php';
+
 function myplugin_load_textdomain() {
     load_plugin_textdomain( 'gpt-welcomer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-
 add_action( 'plugins_loaded', 'myplugin_load_textdomain' );
 
 
+use Symfony\Component\Yaml\Yaml;
 function get_bots() {
-    return [
-        [
-            'bot_name' => 'chatGPT',
-            'bot_explain' => __('ChatGPT visits your site to fetch information and directly respond to users on chat.openai.com. Links to your site will be displayed subtly, reducing the likelihood of clicks.', 'wcgu'),
-            'default_status' => 1,
-            'pattern' => ['ChatGPT-User']
-        ],
-        [
-            'bot_name' => 'CommonCrawl',
-            'bot_explain' => __('CommonCrawl collects data to train AI products, including commercial ones. The companies using this AI technology won\'t provide payment or contribute to your site.', 'wcgu'),
-            'default_status' => 0,
-            'pattern' => ['CCBot'],
-        ],
-        [
-            'bot_name' => 'Bingbot',
-            'bot_explain' => __('Bingbot is transitioning from traditional Bing search to Bing AI search, where AI provides all responses. They claim to link to the data provider within the search results. However, you can verify the traffic from Bing AI search by checking the number of visits from edgeservice.bing.com. From a site I know, it had 1400 visits from the traditional Bing search, while during the same period, the number of visits from Bing AI search was just 5. Despite this, Bing AI search is already generating ad revenue.', 'wcgu'),
-            'default_status' => 1,
-            'pattern' => ['MicrosoftPreview', 'bingbot'],
-        ]
-    ];
+    // YAMLファイルをパース
+    $bots_yaml = Yaml::parseFile(__DIR__ . '/bots.yaml');
+    
+    $bots = [];
+    // 各ボットの情報を配列に格納
+    foreach ($bots_yaml as $bot_name => $bot_data) {
+        $bot = [];
+        $bot['bot_name'] = $bot_name;
+        $bot['bot_explain'] = __("bot_explain_" . $bot_name, 'gpt-welcomer');
+        $bot['default_status'] = $bot_data['default_status'];
+        $bot['pattern'] = $bot_data['pattern'];
+        
+        $bots[] = $bot;
+    }
+    return $bots;
 }
 
 // プラグインが有効化された際に初期値を追加
@@ -57,7 +55,8 @@ register_activation_hook(__FILE__, 'wcgu_activate');
 function wcgu_check_user_agent() {
 
     $bots = get_bots();
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    $userAgentObj = new UserAgent('');
+    $user_agent = $userAgentObj->getUserAgent();
     
     foreach ($bots as $bot) {
         foreach ($bot['pattern'] as $bot_user_agent) {
@@ -76,6 +75,8 @@ function customize_content($content) {
     if (!empty($detected_bot_name)) {
         // Get the user status for the detected bot.
         $user_status = get_option('wcgu_' . strtolower($detected_bot_name) . '_status', 1);
+        // Remove img tags from the content
+        $content = preg_replace('/<img[^>]+\>/i', '', $content);
         // Calculate the percentage of content to show.
         $content_to_show = round(strlen($content) * $user_status / 5);
         // Trim the content.
@@ -83,7 +84,8 @@ function customize_content($content) {
         // Add a link to the full content.
         $site_url = get_bloginfo('url');
         $site_name = get_bloginfo('name');
-        $content .= "<p>" . sprintf(__('For the latest information, please check our website at %s%s%s.', 'wcgu'), "<a href='$site_url'>", $site_name, "</a>") . "</p>";
+        $page_title = get_the_title();
+        $content .= "<p>" . sprintf(__('For the latest information, please check our website at %s%s:%s%s.', 'gpt-welcomer'), "<a href='$site_url'>", $site_name, $page_title, "</a>") . "</p>";
     }
     return $content;
 }
@@ -102,7 +104,7 @@ function add_plugin_page_settings_link($links) {
 
 function wcgu_add_admin_menu() {
     // Create new top-level menu
-    add_options_page('Welcome ChatGPT User', 'Welcome ChatGPT User', 'manage_options', 'wcgu', 'wcgu_options_page');
+    add_options_page('gpt-welcomer settings', 'gpt-welcomer settings', 'manage_options', 'wcgu', 'wcgu_options_page');
 }
 
 function wcgu_settings_init() {
@@ -116,7 +118,7 @@ function wcgu_settings_init() {
 
         add_settings_section(
             'wcgu_' . strtolower($bot['bot_name']) . '_section',
-            __($bot['bot_name'] . ' Settings', 'wcgu'),
+            __($bot['bot_name'] . ' Settings', 'gpt-welcomer'),
             'wcgu_common_section_callback',
             'wcgu',
             array('label_for' => 'wcgu_' . strtolower($bot['bot_name']) . '_status')
@@ -129,14 +131,13 @@ function wcgu_settings_init() {
             'wcgu',
             'wcgu_' . strtolower($bot['bot_name']) . '_section',
             array('label_for' => 'wcgu_' . strtolower($bot['bot_name']) . '_status')
-        );
-        
+        );   
     }
 }
 
 function wcgu_common_section_callback($args) {
     $bot_name = ucfirst(str_replace('wcgu_', '', $args['id']));
-    echo __('This is the settings section for ' . $bot_name . '. X/5 of the content is passed to the bot.', 'wcgu');
+    echo __('This is the settings section for ' . $bot_name . '. X/5 of the content is passed to the bot.', 'gpt-welcomer');
 }
 
 function wcgu_status_render($args) {
@@ -157,7 +158,7 @@ function wcgu_options_page() {
     ?>
     <form action='options.php' method='post'>
 
-        <h2>Welcome ChatGPT User</h2>
+        <h2>gpt-welcomer settings</h2>
 
         <?php
         settings_fields('wcgu');

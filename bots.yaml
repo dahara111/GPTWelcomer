@@ -1,0 +1,15 @@
+chatGPT:
+  default_status: 1
+  pattern: 
+    - ChatGPT-User
+
+Bingbot:
+  default_status: 1
+  pattern: 
+    - MicrosoftPreview
+    - bingbot
+
+CommonCrawl:
+  default_status: 0
+  pattern:
+    - CCBot
