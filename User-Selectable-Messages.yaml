@@ -1,0 +1,62 @@
+User-Selectable-Messages:
+    Reasons-for-Rejection:
+        Community-Cultivation:
+            1:
+                text: 'The reason our site prioritizes human visitors is to promote the formation of a unique community. Please understand and access as a human.'
+            2:
+                text: 'AI browsing is limited. Our site aims to truly nurture human bonds and connections. We appreciate your cooperation.'
+            3:
+                text: 'Due to our utmost importance placed on communication with humans, page display to non-human visitors is restricted. We appreciate your understanding and cooperation.'
+            4:
+                text: 'Our website provides information that should be shared among humans. To avoid excessive load from automated programs, some restrictions have been set.'
+            5:
+                text: 'Access from AI is partially restricted in order to manage the site load and improve the human user experience. We ask for your access as a human visitor.'
+        Loss-of-Engagement-Opportunities:
+            1:
+                text: 'Our site values meaningful interaction with human visitors. Access by AI bots is partially limited because it could impair this engagement.'
+            2:
+                text: 'In order to respect and maintain the opportunity for direct engagement with customers, our website limits browsing by AI bots.'
+            3:
+                text: 'Our website values connection with human readers. Therefore, access from AI bots is restricted. We appreciate your understanding.'
+        Ad-Revenue:
+            1:
+                text: 'Our site is operated relying on advertising revenue. Access by AI bots could potentially hinder this, so we have some browsing restrictions in place.'
+            2:
+                text: 'In order to protect ad revenue, we restrict access by AI bots. We ask for understanding and cooperation from our human visitors.'
+            3:
+                text: 'Human visitor engagement is key to maintaining ad revenue, therefore, we have some browsing restrictions in place for AI bots.'
+        Human-PV-as-KPI:
+            1:
+                text: 'Page views by human viewers are a critical indicator for us. Therefore, we have placed restrictions on access by AI bots.'
+            2:
+                text: 'On our site, we use page views by humans as a performance indicator. To achieve this target, we limit browsing by AI bots.'
+            3:
+                text: 'We prioritize page views by humans as our main performance indicator. As a result, we limit visits from AI bots. We appreciate your cooperation.'
+        Analysis-of-User-Behavior-and-Popular-Content:
+            1:
+                text: 'We limit access by AI bots in order to improve our service through the analysis of human visitor behavior.'
+            2:
+                text: 'In order to understand the interests and actions of human readers, and provide the best content, we limit browsing from AI bots.'
+            3:
+                text: 'Our website aims to improve services based on the behavior and preferences of readers. Therefore, we restrict access by AI bots.'
+        Unexpected-Security-Risks:
+            1:
+                text: 'The unique behavior of AI bots can potentially lead to security risks, so we have placed restrictions on their access.'
+            2:
+                text: 'The behavior of AI bots often differs from that of humans and can cause security concerns, so their access is limited.'
+            3:
+                text: 'Access by AI bots can potentially threaten site security, so we limit some of their browsing.'
+        Excessive-AI-Bot-Access:
+            1:
+                text: 'Massive access from AI bots increases the cost of site operation, so we restrict their browsing.'
+            2:
+                text: 'To maintain the performance of our site, we have some restrictions on access by AI bots.'
+            3:
+                text: 'Maintaining site performance is essential to providing the best experience to our users. Therefore, we limit access from AI bots.'
+        Maintaining-Content-Originality:
+            1:
+                text: 'Our website content is created independently, and in order to maintain its value, we restrict automatic collection, learning, and excerpts by AI bots.'
+            2:
+                text: 'Our site content is consistent and original. As the collection by AI bots is an unintended use, we limit their access.'
+            3:
+                text: 'Our content is unique, and to avoid it being collected and learned by AI bots without restrictions, we limit their access.'

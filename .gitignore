@@ -5,3 +5,5 @@
 /.env
 /vendor
 /bin
+/memo.txt
+/make_yaml.php

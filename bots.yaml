@@ -1,15 +1,34 @@
-chatGPT:
-  default_status: 1
-  pattern: 
+openAI:
+  chatGPT_Web_Browsing:
+    default_percentage: 10
+    pattern: 
     - ChatGPT-User
+  chatGPT_plugin_xxx:
+    default_percentage: 0
+    pattern: 
+    - ""
 
-Bingbot:
-  default_status: 1
-  pattern: 
-    - MicrosoftPreview
-    - bingbot
+otherBot:
+  CommonCrawl:
+    default_percentage: 0
+    pattern:
+      - CCBot
 
-CommonCrawl:
-  default_status: 0
-  pattern:
-    - CCBot
+MicroSoft:
+  Bingbot:
+    default_percentage: 10
+    pattern: 
+      - MicrosoftPreview
+      - bingbot
+
+Google:
+  Googlbot:
+    default_percentage: 100
+    pattern:
+      - Googlebot
+    domain:
+      - .googlebot.com
+  GoogleOther:
+    default_percentage: 10
+    pattern:
+      - GoogleOther

@@ -13,6 +13,8 @@ Domain Path: /languages
 
 require_once 'vendor/autoload.php';
 require_once plugin_dir_path(__FILE__) . 'UserAgent.php';
+require_once plugin_dir_path(__FILE__) . 'Message.php';
+
 
 function myplugin_load_textdomain() {
     load_plugin_textdomain( 'gpt-welcomer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -20,24 +22,16 @@ function myplugin_load_textdomain() {
 add_action( 'plugins_loaded', 'myplugin_load_textdomain' );
 
 
-use Symfony\Component\Yaml\Yaml;
 function get_bots() {
-    // YAMLファイルをパース
-    $bots_yaml = Yaml::parseFile(__DIR__ . '/bots.yaml');
-    
-    $bots = [];
-    // 各ボットの情報を配列に格納
-    foreach ($bots_yaml as $bot_name => $bot_data) {
-        $bot = [];
-        $bot['bot_name'] = $bot_name;
-        $bot['bot_explain'] = __("bot_explain_" . $bot_name, 'gpt-welcomer');
-        $bot['default_status'] = $bot_data['default_status'];
-        $bot['pattern'] = $bot_data['pattern'];
-        
-        $bots[] = $bot;
-    }
-    return $bots;
+    $messageManager = new MessageManager();
+    return $messageManager->get_bots();
 }
+
+function get_messages() {
+    $messageManager = new MessageManager();
+    return $messageManager->get_messages();
+}
+
 
 // プラグインが有効化された際に初期値を追加
 function wcgu_activate() {
@@ -110,18 +104,31 @@ function wcgu_add_admin_menu() {
 function wcgu_settings_init() {
 
     $bots = get_bots();
+    $bot_categories = array();
 
-    register_setting('wcgu', 'wcgu_settings');
+    //register_setting('wcgu', 'wcgu_settings');
     foreach ($bots as $bot) {
         $setting_id = 'wcgu_' . strtolower($bot['bot_name']) . '_status';
         register_setting('wcgu', $setting_id);
+
+        $bot_category = $bot['bot_category'];
+
+        if (!in_array($bot_category, $bot_categories)) {
+            add_settings_section(
+                'wcgu_' . strtolower($bot_category) . '_section',
+                __("BOT related to ", 'gpt-welcomer') . $bot_category,
+                'wcgu_common_category_callback',
+                'wcgu'
+            );
+            $bot_categories[] = $bot_category;
+        }
 
         add_settings_section(
             'wcgu_' . strtolower($bot['bot_name']) . '_section',
             __($bot['bot_name'] . ' Settings', 'gpt-welcomer'),
             'wcgu_common_section_callback',
             'wcgu',
-            array('label_for' => 'wcgu_' . strtolower($bot['bot_name']) . '_status')
+            array(__($bot['bot_explain'] ))
         );
         
         add_settings_field(
@@ -133,11 +140,62 @@ function wcgu_settings_init() {
             array('label_for' => 'wcgu_' . strtolower($bot['bot_name']) . '_status')
         );   
     }
+    $messages = get_messages();
+
+    add_settings_section(
+        'wcgu_messages_section',
+        __('Message Select Section', 'gpt-welcomer'),
+        'wcgu_message_section_callback',
+        'wcgu',
+        array(__('Select the message to be displayed when the AI bot accesses the site.', 'gpt-welcomer'))
+    );
+
+
+    foreach ($messages as $message) {
+        $message_category = $message['message_category'];
+        $message_no = $message['message'];
+
+        // Add a setting field for each message
+        add_settings_field(
+            'wcgu_message_' . strtolower($message_no),
+            __('[' . ucfirst($message_category) . ']  ' . $message_no, 'gpt-welcomer'),
+            'wcgu_message_field_callback',
+            'wcgu',
+            'wcgu_messages_section',
+            array(
+                'label_for' => 'wcgu_message_' . strtolower($message_no),
+                'name' => 'message_choice',
+                'value' => $message['message']
+            )
+        );
+        // Register the setting
+        register_setting('wcgu', 'message_choice');
+    }
+}
+
+function wcgu_message_section_callback($args) {
+    echo esc_html($args[0]);
+}
+
+function wcgu_message_field_callback($args) {
+    $name = esc_attr($args['name']);
+    $value = esc_attr($args['value']);
+    $checked = checked(get_option($name), $value, false);
+
+    echo "<input type='radio' id='{$value}' name='{$name}' value='{$value}' {$checked}>";
+}
+
+function wcgu_common_category_callback($args) {
+//    $bot_name = ucfirst(str_replace('wcgu_', '', $args['id']));
+//    echo __('This is the settings section for ' . $bot_name . '. X/5 of the content is passed to the bot.', 'gpt-welcomer');
 }
 
 function wcgu_common_section_callback($args) {
-    $bot_name = ucfirst(str_replace('wcgu_', '', $args['id']));
-    echo __('This is the settings section for ' . $bot_name . '. X/5 of the content is passed to the bot.', 'gpt-welcomer');
+    // $bot_name = ucfirst(str_replace('wcgu_', '', $args['id']));
+    // echo __('This is the settings section for ' . $bot_name . '. X/5 of the content is passed to the bot.', 'gpt-welcomer');
+    $bot_explain = $args[0]; // この例では、$argsは$bot['bot_explain']のみを含む配列としています
+    // 取り出した情報を出力する
+    echo esc_html($bot_explain);
 }
 
 function wcgu_status_render($args) {
@@ -170,4 +228,24 @@ function wcgu_options_page() {
     <?php
 }
 
+
+// Add extra header.
+// Because some image collection bots ignore robots.txt and require their own headers
+function add_x_robots_tag_header() {
+    $tags = array(
+        'noai',
+        'noindex',
+        'noimageai',
+        'noimageindex'
+    );
+
+    $header_value = '';
+    foreach ($tags as $tag) {
+        $header_value .= $tag . ', ';
+    }
+    $header_value = rtrim($header_value, ', ');
+
+    header('X-Robots-Tag: ' . $header_value);
+}
+add_action('wp_head', 'add_x_robots_tag_header');
 
