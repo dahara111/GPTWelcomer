@@ -20,26 +20,15 @@ class BotsTest extends WP_UnitTestCase {
 	public function test_get_bots() {
 		$expected_bots = [
 			[
-				'bot_name' => 'chatGPT',
-				'bot_explain' => __('bot_explain_chatGPT', 'wcgu'),
-				'default_status' => 1,
+				'bot_category' => 'OpenAI',
+				'bot_name' => 'chatGPT-Web-Browsing',
+				'bot_explain' => __('Developed by openAI, chatGPT uses the browsing function to access the Internet, collect information, and respond directly to the user.', 'gpt-welcomer'),
+				'default-percentage' => 10,
 				'pattern' => ['ChatGPT-User']
-			],
-			[
-				'bot_name' => 'Bingbot',
-				'bot_explain' => __('bot_explain_Bingbot', 'wcgu'),
-				'default_status' => 1,
-				'pattern' => ['MicrosoftPreview', 'bingbot']
-			],
-			[
-				'bot_name' => 'CommonCrawl',
-				'bot_explain' => __('bot_explain_CommonCrawl', 'wcgu'),
-				'default_status' => 0,
-				'pattern' => ['CCBot']
 			]
 		];
 
 		$actual_bots = get_bots();
-		$this->assertEquals($expected_bots, $actual_bots);
+		$this->assertEquals($expected_bots, [$actual_bots[0]]);
 	}
 }

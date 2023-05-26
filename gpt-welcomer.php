@@ -40,20 +40,25 @@ function wcgu_activate() {
     foreach ($bots as $bot) {
         $setting_id = 'wcgu_' . strtolower($bot['bot_name']) . '_status';
         // 初期値を設定
-        add_option($setting_id, $bot['default_status']);
+        add_option($setting_id, $bot[__('default-percentage')]);
     }
 }
 register_activation_hook(__FILE__, 'wcgu_activate');
 
 
-function wcgu_check_user_agent() {
 
-    $bots = get_bots();
-    $userAgentObj = new UserAgent('');
-    $user_agent = $userAgentObj->getUserAgent();
+function wcgu_check_user_agent($bots, $user_agent) {
     
     foreach ($bots as $bot) {
+        if (!is_array($bot['pattern'])) {
+            continue;
+        }
         foreach ($bot['pattern'] as $bot_user_agent) {
+
+            if(empty($bot_user_agent)) {
+                continue;
+            }
+
             if (strpos(strtolower($user_agent), strtolower($bot_user_agent)) !== false) {
                 wp_cache_set('wcgu_detected_bot_name', $bot['bot_name']);
                 return;
@@ -61,7 +66,13 @@ function wcgu_check_user_agent() {
         }
     }
 }
-add_action('init', 'wcgu_check_user_agent');
+function wcgu_check_user_agent_wrapper() {
+    $bots = get_bots();
+    $userAgentObj = new UserAgent('');
+    $user_agent = $userAgentObj->getUserAgent();
+    wcgu_check_user_agent($bots, $user_agent);
+}
+add_action('init', 'wcgu_check_user_agent_wrapper');
 
 function customize_content($content) {
     $detected_bot_name = wp_cache_get('wcgu_detected_bot_name');
@@ -79,7 +90,8 @@ function customize_content($content) {
         $site_url = get_bloginfo('url');
         $site_name = get_bloginfo('name');
         $page_title = get_the_title();
-        $content .= "<p>" . sprintf(__('For the latest information, please check our website at %s%s:%s%s.', 'gpt-welcomer'), "<a href='$site_url'>", $site_name, $page_title, "</a>") . "</p>";
+        $reason = get_option('message_choice');
+        $content .= "<p>" . sprintf(' %s %s%s:%s%s.', $reason, "<a href='$site_url'>", $site_name, $page_title, "</a>") . "</p>";
     }
     return $content;
 }
@@ -92,7 +104,7 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'add_plugin_page_
 function add_plugin_page_settings_link($links) {
     $links[] = '<a href="' . 
         admin_url('options-general.php?page=wcgu') . 
-        '">' . __('Settings') . '</a>';
+        '">' . __('Plugin Settings') . '</a>';
     return $links;
 }
 
@@ -147,7 +159,7 @@ function wcgu_settings_init() {
         __('Message Select Section', 'gpt-welcomer'),
         'wcgu_message_section_callback',
         'wcgu',
-        array(__('Select the message to be displayed when the AI bot accesses the site.', 'gpt-welcomer'))
+        array(__('Select the message to be displayed when the AI bot accesses your site.', 'gpt-welcomer'))
     );
 
 
