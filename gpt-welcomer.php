@@ -33,13 +33,11 @@ function get_messages() {
 }
 
 
-// プラグインが有効化された際に初期値を追加
 function wcgu_activate() {
     $bots = get_bots();
 
     foreach ($bots as $bot) {
         $setting_id = 'wcgu_' . strtolower($bot['bot_name']) . '_status';
-        // 初期値を設定
         add_option($setting_id, $bot[__('default-percentage')]);
     }
 }
@@ -80,18 +78,20 @@ function customize_content($content) {
     if (!empty($detected_bot_name)) {
         // Get the user status for the detected bot.
         $user_status = get_option('wcgu_' . strtolower($detected_bot_name) . '_status', 1);
-        // Remove img tags from the content
-        $content = preg_replace('/<img[^>]+\>/i', '', $content);
-        // Calculate the percentage of content to show.
-        $content_to_show = round(strlen($content) * $user_status / 5);
-        // Trim the content.
-        $content = substr($content, 0, $content_to_show);
-        // Add a link to the full content.
-        $site_url = get_bloginfo('url');
-        $site_name = get_bloginfo('name');
-        $page_title = get_the_title();
-        $reason = get_option('message_choice');
-        $content .= "<p>" . sprintf(' %s %s%s:%s%s.', $reason, "<a href='$site_url'>", $site_name, $page_title, "</a>") . "</p>";
+        if ($user_status != 100){
+            // Remove img tags from the content
+            $content = preg_replace('/<img[^>]+\>/i', '', $content);
+            // Calculate the percentage of content to show.
+            $content_to_show = round(strlen($content) * $user_status / 100);
+            // Trim the content.
+            $content = substr($content, 0, $content_to_show);
+            // Add a link to the full content.
+            $site_url = get_bloginfo('url');
+            $site_name = get_bloginfo('name');
+            $page_title = get_the_title();
+            $reason = get_option('message_choice');
+            $content .= "<p>" . sprintf(' %s %s%s:%s%s.', $reason, "<a href='$site_url'>", $site_name, $page_title, "</a>") . "</p>";
+        }
     }
     return $content;
 }
@@ -128,7 +128,7 @@ function wcgu_settings_init() {
         if (!in_array($bot_category, $bot_categories)) {
             add_settings_section(
                 'wcgu_' . strtolower($bot_category) . '_section',
-                __("BOT related to ", 'gpt-welcomer') . $bot_category,
+                $bot_category . __(" related BOT", 'gpt-welcomer'),
                 'wcgu_common_category_callback',
                 'wcgu'
             );
@@ -137,7 +137,7 @@ function wcgu_settings_init() {
 
         add_settings_section(
             'wcgu_' . strtolower($bot['bot_name']) . '_section',
-            __($bot['bot_name'] . ' Settings', 'gpt-welcomer'),
+            $bot['bot_name'] . ' ' . __('Settings', 'gpt-welcomer'),
             'wcgu_common_section_callback',
             'wcgu',
             array(__($bot['bot_explain'] ))
@@ -145,7 +145,7 @@ function wcgu_settings_init() {
         
         add_settings_field(
             'wcgu_' . strtolower($bot['bot_name']) . '_status',
-            __($bot['bot_name'] . ' Status (0-5)', 'wcgu'),
+            $bot['bot_name'] . __(' Percentage of passing the text(0-100)', 'gpt-welcomer'),
             'wcgu_status_render',
             'wcgu',
             'wcgu_' . strtolower($bot['bot_name']) . '_section',
@@ -170,7 +170,7 @@ function wcgu_settings_init() {
         // Add a setting field for each message
         add_settings_field(
             'wcgu_message_' . strtolower($message_no),
-            __('[' . ucfirst($message_category) . ']  ' . $message_no, 'gpt-welcomer'),
+            "[" . $message_category . "] " . $message_no,
             'wcgu_message_field_callback',
             'wcgu',
             'wcgu_messages_section',
@@ -198,28 +198,29 @@ function wcgu_message_field_callback($args) {
 }
 
 function wcgu_common_category_callback($args) {
-//    $bot_name = ucfirst(str_replace('wcgu_', '', $args['id']));
-//    echo __('This is the settings section for ' . $bot_name . '. X/5 of the content is passed to the bot.', 'gpt-welcomer');
+    // nothing
 }
 
 function wcgu_common_section_callback($args) {
-    // $bot_name = ucfirst(str_replace('wcgu_', '', $args['id']));
-    // echo __('This is the settings section for ' . $bot_name . '. X/5 of the content is passed to the bot.', 'gpt-welcomer');
     $bot_explain = $args[0]; // この例では、$argsは$bot['bot_explain']のみを含む配列としています
-    // 取り出した情報を出力する
     echo esc_html($bot_explain);
 }
 
 function wcgu_status_render($args) {
     $option = get_option($args['label_for']);
     ?>
-    <select name="<?php echo $args['label_for']; ?>" style="width: 50px;">
+    <select name="<?php echo $args['label_for']; ?>" style="width: 70px;">
         <option value="0" <?php selected($option, 0); ?>>0</option>
-        <option value="1" <?php selected($option, 1); ?>>1</option>
-        <option value="2" <?php selected($option, 2); ?>>2</option>
-        <option value="3" <?php selected($option, 3); ?>>3</option>
-        <option value="4" <?php selected($option, 4); ?>>4</option>
-        <option value="5" <?php selected($option, 5); ?>>5</option>
+        <option value="10" <?php selected($option, 10); ?>>10</option>
+        <option value="20" <?php selected($option, 20); ?>>20</option>
+        <option value="30" <?php selected($option, 30); ?>>30</option>
+        <option value="40" <?php selected($option, 40); ?>>40</option>
+        <option value="50" <?php selected($option, 50); ?>>50</option>
+        <option value="60" <?php selected($option, 60); ?>>60</option>
+        <option value="70" <?php selected($option, 70); ?>>70</option>
+        <option value="80" <?php selected($option, 80); ?>>80</option>
+        <option value="90" <?php selected($option, 90); ?>>90</option>
+        <option value="100" <?php selected($option, 100); ?>>100</option>
     </select>
     <?php
 }

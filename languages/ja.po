@@ -1,56 +1,281 @@
 # Japanese translations for dev package.
 # Copyright (C) 2023 THE dev'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the dev package.
-# root <dahara111@webbigdata.jp>, 2023.
+# dev3 <dahara111@webbigdata.jp>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: dev 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-24 15:49+0900\n"
-"PO-Revision-Date: 2023-05-24 17:54+0900\n"
-"Last-Translator: root <dahara111@webbigdata.jp>\n"
-"Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2023-05-28 20:56+0900\n"
+"PO-Revision-Date: 2023-05-28 21:07+0900\n"
+"Last-Translator: dahara111 <dahara111@webbigdata.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-# explanation of this plugun.
-msgid "This plugin welcomes users using chatGPT's web browsing plugin and encourages users to visit your website."
-msgstr "このプラグインはChatGPTのウェブブラウジング機能を使っているユーザーを歓>迎し、Webサイトへの訪問を促します。"
+#: Message.php:17 Message.php:175
+msgid "User selectable messages"
+msgstr "ユーザー選択メッセージ"
 
-# This is the explanation for the ChatGPT bot
-msgid "bot_explain_ChatGPT"
-msgstr "ChatGPTはOpenAIが提供する会話型AIです。ブラウジング機能を使うとAIがWebサイトの情報を読み込んで回答するので、人間がWebサイトに訪問する必要がなくなります。"
+#: Message.php:18 Message.php:175
+msgid "Reasons for rejection"
+msgstr "拒否する理由"
 
-#. This is the explanation for the Bingbot bot
-msgid "bot_explain_Bingbot"
-msgstr "BingbotはMicroSoftが提供するAI検索です。AI検索とはAIを使って様々なWebサイトの情報を無断で組み合わせて回答し、広告収入を独占するビジネスモデルです。"
+#: Message.php:19
+msgid "Community cultivation"
+msgstr "コミュニティの育成"
 
-#. This is the explanation for the CommonCrawl bot
-msgid "bot_explain_CommonCrawl"
-msgstr "CommonCrawlが収集したデータは営利目的を含む様々なAIを学習させる際に使われます。これらの営利目的のAIからWebサイト運営者に収益が分配される事はありません"
-
-#: gpt-welcomer.php:90
-#, php-format
-msgid "最新の情報について私達のWebサイトを是非ともご訪問ください。%s%s:%s%s."
+#: Message.php:21
+msgid ""
+"The reason our site prioritizes human visitors is to promote the formation "
+"of a unique community. Please understand and access as a human."
 msgstr ""
+"当サイトは人間の訪問者を重視する理由は、ユニークなコミュニティの形成を促進するためです。 "
+"ご理解いただき、人間としてのアクセスをお願いします。"
 
-#: gpt-welcomer.php:103
+#: Message.php:24
+msgid "Loss of engagement opportunities"
+msgstr "エンゲージメントの機会損失"
+
+#: Message.php:26
+msgid ""
+"Our site values meaningful interaction with human visitors. Access by AI "
+"bots is partially limited because it could impair this engagement."
+msgstr ""
+"当サイトは人間の訪問者との価値ある交流を大切にしています。"
+"AIボットによるアクセスは、このエンゲージメントを損ねる可能性があるため、一部制限しております。"
+
+#: Message.php:29
+msgid "Ad revenue"
+msgstr "広告収益"
+
+#: Message.php:31
+msgid ""
+"Our site is operated relying on advertising revenue. Access by AI bots could "
+"potentially hinder this, so we have some browsing restrictions in place."
+msgstr ""
+"当サイトは広告収益で運営されております。"
+"AIボットによるアクセスはこれを阻害する可能性があるため、一部閲覧制限を行っています。"
+
+#: Message.php:34
+msgid "Human PV as KPI"
+msgstr "人間のPVがKPI"
+
+#: Message.php:36
+msgid ""
+"Page views by human viewers are a critical indicator for us. Therefore, we "
+"have placed restrictions on access by AI bots."
+msgstr ""
+"人間の閲覧者によるページビューは本サイトの重要な指標であります。"
+"そのため、AIボットのアクセスは制限させていただいております。"
+
+#: Message.php:39
+msgid "Analysis of user behavior-and-Popular-Content"
+msgstr "ユーザー行動パターンや人気コンテンツの分析"
+
+#: Message.php:41
+msgid ""
+"We limit access by AI bots in order to improve our service through the "
+"analysis of human visitor behavior."
+msgstr ""
+"人間の訪問者の行動分析を行ったサービスを向上させるため、AIボットのアクセスは制限しています。"
+
+#: Message.php:44
+msgid "Unexpected security risks"
+msgstr "予想外のセキュリティ上のリスク"
+
+#: Message.php:46
+msgid ""
+"The unique behavior of AI bots can potentially lead to security risks, so we "
+"have placed restrictions on their access."
+msgstr ""
+"AIボットの特異な行動はセキュリティリスクを招く可能性があるため、私たちはそのアクセスを一部制限しています。"
+
+#: Message.php:49
+msgid "Excessive AI Bot Access"
+msgstr "AIボットのアクセスが多すぎる"
+
+#: Message.php:51
+msgid ""
+"Massive access from AI bots increases the cost of site operation, so we "
+"restrict their browsing."
+msgstr ""
+"AIボットからの大量のアクセスがサイト運営上のコストを増加させているため、当ウェブサイトはその閲覧を制限しています。"
+
+#: Message.php:54
+msgid "Maintaining content originality"
+msgstr "コンテンツの独自性維持"
+
+#: Message.php:56
+msgid ""
+"Our website content is created independently, and in order to maintain its "
+"value, we restrict automatic collection, learning, and excerpts by AI bots."
+msgstr ""
+"当ウェブサイトのコンテンツは独自に作成されており、その価値を維持するためAIボットによる自動収集と学習、一部抜粋を制限しています。"
+
+#: Message.php:59
+msgid "Emphasis on human visitors."
+msgstr "人間を重視を強調"
+
+#: Message.php:61
+msgid ""
+"By limiting the access of AI bots, we are showing our emphasis on our human "
+"visitors. We value our connections with humans, and hence, we have "
+"implemented this measure."
+msgstr ""
+"AIボットのアクセスを制限することで、人間の訪問者の皆様を重視する姿勢を示しています。"
+"人間との繋がりを大切にしているため、この措置をとらせていただいています。"
+
+
+#: Message.php:64
+msgid "Brand of the site"
+msgstr "ブランドの認知価値を守りたい"
+
+#: Message.php:66
+msgid ""
+"To maintain the brand value of our site and enhance its value for human "
+"visitors, we have put some restrictions on automatic information collection "
+"by AI bots."
+msgstr ""
+"当サイトはAIボットによる自動情報収集を制限しています。これは私たちのブランドの認知価値を保つための重要な取り組みです。"
+
+
+#: Message.php:73 Message.php:157
+msgid "Bot information"
+msgstr "ボットの情報"
+
+#: Message.php:74
+msgid "OpenAI"
+msgstr "openAI"
+
+#: Message.php:75
+msgid "chatGPT Web Browsing"
+msgstr "chatGPT ウェブブラウジング"
+
+#: Message.php:76 Message.php:83 Message.php:93 Message.php:102 Message.php:112
+#: Message.php:122 Message.php:165 gpt-welcomer.php:41
+msgid "default-percentage"
+msgstr "ディフォルトの割合"
+
+#: Message.php:77 Message.php:84 Message.php:94 Message.php:103 Message.php:113
+#: Message.php:123 Message.php:166
+msgid "pattern"
+msgstr "パターン"
+
+#: Message.php:80 Message.php:87 Message.php:97 Message.php:107 Message.php:119
+#: Message.php:126 Message.php:164
+msgid "bot_explain"
+msgstr "ボットの説明"
+
+#: Message.php:80
+msgid ""
+"Developed by openAI, chatGPT uses the browsing function to access the "
+"Internet, collect information, and respond directly to the user."
+msgstr ""
+"openAI によって開発された chatGPT は、ウェブブラウジング機能を使用してインターネットにアクセスします。"
+"Webサイトから情報を収集し、ユーザーに直接回答します。"
+
+#: Message.php:82
+msgid "chatGPT plugin xxx"
+msgstr "chatGPTのプラグイン XXX"
+
+#: Message.php:87
+msgid ""
+"There are plug-ins provided by third parties for chatGPT that access the "
+"Internet, collect information, and respond directly to the user; These "
+"can't be at this time because they pretend to be human by spoofing the UserAgent."
+msgstr ""
+"chatGPT 用にサードパーティが提供するプラグインがあり、インターネットにアクセスして"
+"情報を収集し、ユーザーに直接回答します。これらのボットは UserAgent を偽装して"
+"人間のフリをするため、現時点では除外できません。"
+
+#: Message.php:91
+msgid "OtherBot"
+msgstr "その他のボット"
+
+#: Message.php:92
+msgid "Common Crawl"
+msgstr "Common Crawl"
+
+#: Message.php:97
+msgid ""
+"CommonCrawl will access the Internet to collect information and provide it "
+"to various AIs, including commercial ones. No data source citations or "
+"revenue returns will be provided."
+msgstr "Common Crawlはインターネットにアクセスして情報を収集し、商用AIを含む"
+"さまざまなAIに提供します。データソースの引用や収益の還元は提供されません。"
+
+#: Message.php:100
+msgid "Microsoft"
+msgstr "Microsoft"
+
+#: Message.php:101
+msgid "Bingbot"
+msgstr "Bingbot"
+
+#: Message.php:107
+msgid ""
+"Microsoft monopolizes advertising revenue by building AI systems that directly "
+"answer user queries using information from individual websites. At the moment, "
+"the only way to prevent AI from stealing content is to stop Bing search bots."
+msgstr ""
+"マイクロソフトは、個々のWebサイトから得た情報を使って、ユーザーの問い合わせに"
+"直接答えるAIシステムを構築して広告収入を独占しています。現時点では、AIによる"
+"コンテンツ無断利用を防ぐ唯一の方法は、Bing検索用のボットを制限することです。"
+
+#: Message.php:110
+msgid "Google"
+msgstr "Google"
+
+#: Message.php:111
+msgid "Googlebot"
+msgstr "Googlebot"
+
+#: Message.php:116
+msgid "domain"
+msgstr "domain"
+
+#: Message.php:119
+msgid ""
+"Google's Bard is not restricted by default, as it does not have a web search "
+"function at this time."
+msgstr ""
+"現時点では Google Bard には Web 検索機能がないため、デフォルトでは制限していません。"
+
+#: Message.php:121
+msgid "GoogleOtherBot"
+msgstr "Googleのその他のBot"
+
+#: Message.php:126
+msgid ""
+"GoogleOtherBot is a bot for Google products other than Google Search,"
+" and it may be used for AI products, but we're looking at it now."
+msgstr ""
+"GoogleOtherBot は Google 検索以外の Google 製品用のボットであり、AI 製品に使用される可能性もありますが現在は様子を見ています。"
+
+#: gpt-welcomer.php:105
+msgid "Plugin Settings"
+msgstr "プラグイン設定"
+
+#: gpt-welcomer.php
 msgid "Settings"
 msgstr "設定"
 
-#: gpt-welcomer.php:123
-msgid " Settings"
-msgstr "設定"
+#: gpt-welcomer.php:129
+msgid " related BOT"
+msgstr "に関連するボット"
 
-#: gpt-welcomer.php:131
-msgid " Status (0-5)"
-msgstr "状態"
+#: gpt-welcomer.php:146
+msgid " Percentage of passing the text(0-100)"
+msgstr "に本文を渡す割合(0-100)"
 
-#: gpt-welcomer.php:142
-msgid "This is the settings section for "
-msgstr "以下のボットに対する設定です："
+#: gpt-welcomer.php:157
+msgid "Message Select Section"
+msgstr "ボットに表示するメッセージの選択"
 
+#: gpt-welcomer.php:160
+msgid "Select the message to be displayed when the AI bot accesses your site."
+msgstr "AI ボットがサイトにアクセスしたときに本文の最後に追加して表示するメッセージを選択します。"

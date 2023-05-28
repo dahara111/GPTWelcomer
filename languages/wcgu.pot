@@ -1,56 +1,254 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-24 15:49+0900\n"
-"PO-Revision-Date: 2023-05-24 15:49+0900\n"
+"POT-Creation-Date: 2023-05-28 20:56+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-
-# explanation of this plugun.
-msgid "This plugin welcomes users using chatGPT's web browsing plugin and encourages users to visit your website."
+#: Message.php:17 Message.php:175
+msgid "User selectable messages"
 msgstr ""
 
-#. This is the explanation for the ChatGPT bot
-msgid "bot_explain_ChatGPT"
+#: Message.php:18 Message.php:175
+msgid "Reasons for rejection"
 msgstr ""
 
-#. This is the explanation for the Bingbot bot
-msgid "bot_explain_Bingbot"
+#: Message.php:19
+msgid "Community cultivation"
 msgstr ""
 
-#. This is the explanation for the CommonCrawl bot
-msgid "bot_explain_CommonCrawl"
+#: Message.php:21
+msgid ""
+"The reason our site prioritizes human visitors is to promote the formation "
+"of a unique community. Please understand and access as a human."
 msgstr ""
 
-#: gpt-welcomer.php:90
-#, php-format
-msgid "For the latest information, please check our website at %s%s:%s%s."
+#: Message.php:24
+msgid "Loss of engagement opportunities"
 msgstr ""
 
-#: gpt-welcomer.php:103
+#: Message.php:26
+msgid ""
+"Our site values meaningful interaction with human visitors. Access by AI "
+"bots is partially limited because it could impair this engagement."
+msgstr ""
+
+#: Message.php:29
+msgid "Ad revenue"
+msgstr ""
+
+#: Message.php:31
+msgid ""
+"Our site is operated relying on advertising revenue. Access by AI bots could "
+"potentially hinder this, so we have some browsing restrictions in place."
+msgstr ""
+
+#: Message.php:34
+msgid "Human PV as KPI"
+msgstr ""
+
+#: Message.php:36
+msgid ""
+"Page views by human viewers are a critical indicator for us. Therefore, we "
+"have placed restrictions on access by AI bots."
+msgstr ""
+
+#: Message.php:39
+msgid "Analysis of user behavior-and-Popular-Content"
+msgstr ""
+
+#: Message.php:41
+msgid ""
+"We limit access by AI bots in order to improve our service through the "
+"analysis of human visitor behavior."
+msgstr ""
+
+#: Message.php:44
+msgid "Unexpected security risks"
+msgstr ""
+
+#: Message.php:46
+msgid ""
+"The unique behavior of AI bots can potentially lead to security risks, so we "
+"have placed restrictions on their access."
+msgstr ""
+
+#: Message.php:49
+msgid "Excessive AI Bot Access"
+msgstr ""
+
+#: Message.php:51
+msgid ""
+"Massive access from AI bots increases the cost of site operation, so we "
+"restrict their browsing."
+msgstr ""
+
+#: Message.php:54
+msgid "Maintaining content originality"
+msgstr ""
+
+#: Message.php:56
+msgid ""
+"Our website content is created independently, and in order to maintain its "
+"value, we restrict automatic collection, learning, and excerpts by AI bots."
+msgstr ""
+
+#: Message.php:59
+msgid "Emphasis on human visitors."
+msgstr ""
+
+#: Message.php:61
+msgid ""
+"By limiting the access of AI bots, we are showing our emphasis on our human "
+"visitors. We value our connections with humans, and hence, we have "
+"implemented this measure."
+msgstr ""
+
+#: Message.php:64
+msgid "Brand of the site"
+msgstr ""
+
+#: Message.php:66
+msgid ""
+"To maintain the brand value of our site and enhance its value for human "
+"visitors, we have put some restrictions on automatic information collection "
+"by AI bots."
+msgstr ""
+
+#: Message.php:73 Message.php:157
+msgid "Bot information"
+msgstr ""
+
+#: Message.php:74
+msgid "OpenAI"
+msgstr ""
+
+#: Message.php:75
+msgid "chatGPT Web Browsing"
+msgstr ""
+
+#: Message.php:76 Message.php:83 Message.php:93 Message.php:102 Message.php:112
+#: Message.php:122 Message.php:165 gpt-welcomer.php:41
+msgid "default-percentage"
+msgstr ""
+
+#: Message.php:77 Message.php:84 Message.php:94 Message.php:103 Message.php:113
+#: Message.php:123 Message.php:166
+msgid "pattern"
+msgstr ""
+
+#: Message.php:80 Message.php:87 Message.php:97 Message.php:107 Message.php:119
+#: Message.php:126 Message.php:164
+msgid "bot_explain"
+msgstr ""
+
+#: Message.php:80
+msgid ""
+"Developed by openAI, chatGPT uses the browsing function to access the "
+"Internet, collect information, and respond directly to the user."
+msgstr ""
+
+#: Message.php:82
+msgid "chatGPT plugin xxx"
+msgstr ""
+
+#: Message.php:87
+msgid ""
+"There are plug-ins provided by third parties for chatGPT that access the "
+"Internet, collect information, and respond directly to the user; These "
+"can't be at this time because they pretend to be human by spoofing the UserAgent."
+msgstr ""
+
+#: Message.php:91
+msgid "OtherBot"
+msgstr ""
+
+#: Message.php:92
+msgid "Common Crawl"
+msgstr ""
+
+#: Message.php:97
+msgid ""
+"CommonCrawl will access the Internet to collect information and provide it "
+"to various AIs, including commercial ones. No data source citations or "
+"revenue returns will be provided."
+msgstr ""
+
+#: Message.php:100
+msgid "Microsoft"
+msgstr ""
+
+#: Message.php:101
+msgid "Bingbot"
+msgstr ""
+
+#: Message.php:107
+msgid ""
+"Microsoft monopolizes advertising revenue by building AI systems that directly "
+" answer user queries using information from individual websites. At the moment, "
+"the only way to prevent AI from stealing content is to stop Bing search bots."
+msgstr ""
+
+#: Message.php:110
+msgid "Google"
+msgstr ""
+
+#: Message.php:111
+msgid "Googlebot"
+msgstr ""
+
+#: Message.php:116
+msgid "domain"
+msgstr ""
+
+#: Message.php:119
+msgid ""
+"Google's Bard is not restricted by default, as it does not have a web search "
+"function at this time."
+msgstr ""
+
+#: Message.php:121
+msgid "GoogleOtherBot"
+msgstr ""
+
+#: Message.php:126
+msgid ""
+"GoogleOtherBot is a bot for Google products other than Google Search,"
+" and it may be used for AI products, but we're looking at it now. "
+msgstr ""
+
+
+#: gpt-welcomer.php:105
+msgid "Plugin Settings"
+msgstr ""
+
+#: gpt-welcomer.php
 msgid "Settings"
+
+#: gpt-welcomer.php:129
+msgid " related BOT"
 msgstr ""
 
-#: gpt-welcomer.php:123
-msgid " Settings"
+#: gpt-welcomer.php:146
+msgid " Percentage of passing the text(0-100)"
 msgstr ""
 
-#: gpt-welcomer.php:131
-msgid " Status (0-5)"
+#: gpt-welcomer.php:157
+msgid "Message Select Section"
 msgstr ""
 
-#: gpt-welcomer.php:142
-msgid "This is the settings section for "
+#: gpt-welcomer.php:160
+msgid "Select the message to be displayed when the AI bot accesses your site."
 msgstr ""
