@@ -218,13 +218,13 @@ msgstr "Bingbot"
 
 #: Message.php:107
 msgid ""
-"Microsoft monopolizes advertising revenue by building AI systems that directly "
-"answer user queries using information from individual websites. At the moment, "
-"the only way to prevent AI from stealing content is to stop Bing search bots."
+"Microsoft monopolizes advertising revenue by building AI systems that directly"
+" answer user queries using information from individual websites. At this time,"
+" it seems that the data for Bing Search and the data for AI are not separated."
 msgstr ""
 "マイクロソフトは、個々のWebサイトから得た情報を使って、ユーザーの問い合わせに"
-"直接答えるAIシステムを構築して広告収入を独占しています。現時点では、AIによる"
-"コンテンツ無断利用を防ぐ唯一の方法は、Bing検索用のボットを制限することです。"
+"直接答えるAIシステムを構築して広告収入を独占しています。現時点では、Bing検索用"
+"のデータとAI用のデータは分別されていないようです。"
 
 #: Message.php:110
 msgid "Google"
