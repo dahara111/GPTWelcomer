@@ -42,53 +42,63 @@ class MessageManager {
 		$this->data = array(
 			__( 'User selectable messages', 'gpt-welcomer' ) => array(
 				__( 'Reasons for rejection', 'gpt-welcomer' ) => array(
-					__( 'Community cultivation', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Community cultivation' => array(
+						'category-name'     => __( 'chatGPT Web Browsing', 'gpt-welcomer' ),
+						'category-reason'   => array(
 							'text' => __( 'The reason our site prioritizes human visitors is to promote the formation of a unique community. Please understand and access as a human.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Loss of engagement opportunities', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Loss of engagement opportunities' => array(
+						'category-name' => __( 'Loss of engagement opportunities', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'Our site values meaningful interaction with human visitors. Access by AI bots is partially limited because it could impair this engagement.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Ad revenue', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Ad revenue' => array(
+						'category-name' => __( 'Ad revenue', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'Our site is operated relying on advertising revenue. Access by AI bots could potentially hinder this, so we have some browsing restrictions in place.', 'gpt-welcomer' ),
 						),
 					),
 					__( 'Human PV as KPI', 'gpt-welcomer' ) => array(
-						'1' => array(
+						'category-name' => __( 'Human PV as KPI', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'Page views by human viewers are a critical indicator for us. Therefore, we have placed restrictions on access by AI bots.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Analysis of user behavior-and-Popular-Content', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Analysis of user behavior and popular content' => array(
+						'category-name' => __( 'Analysis of user behavior and popular content', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'We limit access by AI bots in order to improve our service through the analysis of human visitor behavior.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Unexpected security risks', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Unexpected security risks' => array(
+						'category-name' => __( 'Unexpected security risks', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'The unique behavior of AI bots can potentially lead to security risks, so we have placed restrictions on their access.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Excessive AI Bot Access', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Excessive AI Bot Access' => array(
+						'category-name' => __( 'Excessive AI Bot Access', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'Massive access from AI bots increases the cost of site operation, so we restrict their browsing.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Maintaining content originality', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Maintaining content originality' => array(
+						'category-name' => __( 'Maintaining content originality', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'Our website content is created independently, and in order to maintain its value, we restrict automatic collection, learning, and excerpts by AI bots.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Emphasis on human visitors.', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Emphasis on human visitors' => array(
+						'category-name' => __( 'Emphasis on human visitors', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'By limiting the access of AI bots, we are showing our emphasis on our human visitors. We value our connections with humans, and hence, we have implemented this measure.', 'gpt-welcomer' ),
 						),
 					),
-					__( 'Brand of the site', 'gpt-welcomer' ) => array(
-						'1' => array(
+					'Brand of the site' => array(
+						'category-name' => __( 'Brand of the site', 'gpt-welcomer' ),
+						'category-reason' => array(
 							'text' => __( 'To maintain the brand value of our site and enhance its value for human visitors, we have put some restrictions on automatic information collection by AI bots.', 'gpt-welcomer' ),
 						),
 					),
@@ -98,42 +108,47 @@ class MessageManager {
 			),
 			__( 'Bot information', 'gpt-welcomer' ) => array(
 				__( 'OpenAI', 'gpt-welcomer' )    => array(
-					__( 'chatGPT Web Browsing', 'gpt-welcomer' ) => array(
-						__( 'default-percentage', 'gpt-welcomer' ) => 10,
+					'chatGPT Web Browsing' => array(
+						'bot-name' => __( 'chatGPT Web Browsing', 'gpt-welcomer' ),
+						__( 'default-percentage', 'gpt-welcomer' ) => 20,
 						__( 'pattern', 'gpt-welcomer' ) => array(
 							'ChatGPT-User',
 						),
-						__( 'bot_explain', 'gpt-welcomer' ) => __( 'Developed by openAI, chatGPT uses the browsing function to access the Internet, collect information, and respond directly to the user.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'Developed by openAI, chatGPT uses the browsing function to access the Internet, collect information, and respond directly to the user.', 'gpt-welcomer' ),
 					),
-					__( 'chatGPT plugin xxx', 'gpt-welcomer' ) => array(
-						__( 'default-percentage', 'gpt-welcomer' ) => 10,
+					'chatGPT plugin xxx' => array(
+						'bot-name' => __( 'chatGPT plugin xxx', 'gpt-welcomer' ),
+						__( 'default-percentage', 'gpt-welcomer' ) => 20,
 						__( 'pattern', 'gpt-welcomer' ) => array(
 							'',
 						),
-						__( 'bot_explain', 'gpt-welcomer' ) => __( 'There are plug-ins provided by third parties for chatGPT that access the Internet, collect information, and respond directly to the user; These can\'t be at this time because they pretend to be human by spoofing the UserAgent.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'There are plug-ins provided by third parties for chatGPT that access the Internet, collect information, and respond directly to the user; These can\'t be at this time because they pretend to be human by spoofing the UserAgent.', 'gpt-welcomer' ),
 					),
 				),
 				__( 'OtherBot', 'gpt-welcomer' )  => array(
-					__( 'Common Crawl', 'gpt-welcomer' ) => array(
-						__( 'default-percentage', 'gpt-welcomer' ) => 0,
+					'Common Crawl' => array(
+						'bot-name' => __( 'Common Crawl', 'gpt-welcomer' ),
+						__( 'default-percentage', 'gpt-welcomer' ) => 10,
 						__( 'pattern', 'gpt-welcomer' ) => array(
 							'CCBot',
 						),
-						__( 'bot_explain', 'gpt-welcomer' ) => __( 'CommonCrawl will access the Internet to collect information and provide it to various AIs, including commercial ones. No data source citations or revenue returns will be provided.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'CommonCrawl will access the Internet to collect information and provide it to various AIs, including commercial ones. No data source citations or revenue returns will be provided.', 'gpt-welcomer' ),
 					),
 				),
 				__( 'Microsoft', 'gpt-welcomer' ) => array(
-					__( 'Bingbot', 'gpt-welcomer' ) => array(
-						__( 'default-percentage', 'gpt-welcomer' ) => 10,
+					'Bingbot' => array(
+						'bot-name' => __( 'Bingbot', 'gpt-welcomer' ),
+						__( 'default-percentage', 'gpt-welcomer' ) => 20,
 						__( 'pattern', 'gpt-welcomer' ) => array(
 							'MicrosoftPreview',
 							'bingbot',
 						),
-						__( 'bot_explain', 'gpt-welcomer' ) => __( 'Microsoft monopolizes advertising revenue by building AI systems that directly answer user queries using information from individual websites. At this time, it seems that the data for Bing Search and the data for AI are not separated.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'Microsoft monopolizes advertising revenue by building AI systems that directly answer user queries using information from individual websites. At this time, it seems that the data for Bing Search and the data for AI are not separated.', 'gpt-welcomer' ),
 					),
 				),
 				__( 'Google', 'gpt-welcomer' )    => array(
-					__( 'Googlebot', 'gpt-welcomer' )      => array(
+					'Googlebot' => array(
+						'bot-name' => __( 'Googlebot', 'gpt-welcomer' ),
 						__( 'default-percentage', 'gpt-welcomer' ) => 100,
 						__( 'pattern', 'gpt-welcomer' ) => array(
 							'Googlebot',
@@ -141,14 +156,15 @@ class MessageManager {
 						__( 'domain', 'gpt-welcomer' )  => array(
 							'.googlebot.com',
 						),
-						__( 'bot_explain', 'gpt-welcomer' ) => __( 'Google\'s Bard is not restricted by default, as it does not have a web search function at this time.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'Google\'s Bard is not restricted by default, as it does not have a web search function at this time.', 'gpt-welcomer' ),
 					),
-					__( 'GoogleOtherBot', 'gpt-welcomer' ) => array(
+					'GoogleOtherBot' => array(
+						'bot-name' => __( 'GoogleOtherBot', 'gpt-welcomer' ),
 						__( 'default-percentage', 'gpt-welcomer' ) => 100,
 						__( 'pattern', 'gpt-welcomer' ) => array(
 							'GoogleOther',
 						),
-						__( 'bot_explain', 'gpt-welcomer' ) => __( 'GoogleOtherBot is a bot for Google products other than Google Search, and it may be used for AI products, but we\'re looking at it now.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'GoogleOtherBot is a bot for Google products other than Google Search, and it may be used for AI products, but we\'re looking at it now.', 'gpt-welcomer' ),
 					),
 				),
 			),
@@ -204,9 +220,10 @@ class MessageManager {
 			foreach ( $bots_array as $bot_name => $bot_data ) {
 				$bot                       = array();
 				$bot['bot_category']       = $bot_category;
-				$bot['bot_name']           = $bot_name;
-				$bot['bot_explain']        = $bot_data[ __( 'bot_explain', 'gpt-welcomer' ) ];
-				$bot['default-percentage'] = $bot_data[ __( 'default-percentage', 'gpt-welcomer' ) ];
+				$bot['bot_key_name']       = preg_replace( '/[^a-zA-Z0-9]/', '_', $bot_name );
+				$bot['bot_name']           = $bot_data[ __( 'bot-name', 'gpt-welcomer' ) ];
+				$bot['bot_explain']        = $bot_data[ __( 'bot-explain', 'gpt-welcomer' ) ];
+				$bot['default_percentage'] = $bot_data[ __( 'default-percentage', 'gpt-welcomer' ) ];
 				$bot['pattern']            = $bot_data[ __( 'pattern', 'gpt-welcomer' ) ];
 				$bots[]                    = $bot;
 			}
@@ -222,11 +239,11 @@ class MessageManager {
 		$messages_data = $this->data[ __( 'User selectable messages', 'gpt-welcomer' ) ][ __( 'Reasons for rejection', 'gpt-welcomer' ) ];
 
 		foreach ( $messages_data as $message_category => $messages_array ) {
-			foreach ( $messages_array as $message_no => $message_struct ) {
-				$message                     = array();
-				$message['message_category'] = $message_category;
-				$message['message_no']       = $message_no;
-				$message['message']          = $message_struct['text'];
+			foreach ( $messages_array['category-reason'] as $key => $value ) {
+				$message['message_key_name'] = preg_replace( '/[^a-zA-Z0-9]/', '_', $message_category );
+				$message['message_category'] = $messages_array['category-name'];
+				$message['message_no']       = $key;
+				$message['message']          = $value;
 				$messages[]                  = $message;
 			}
 		}

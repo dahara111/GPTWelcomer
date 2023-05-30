@@ -17,6 +17,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "gpt-welcomer is a WordPress plugin that limits content visibility for AI visitors like chatGPT or Bing AI bot, only a portion of the content is displayed in response."
+msgstr ""
+
 #: Message.php:17 Message.php:175
 msgid "User selectable messages"
 msgstr ""
@@ -66,7 +69,7 @@ msgid ""
 msgstr ""
 
 #: Message.php:39
-msgid "Analysis of user behavior-and-Popular-Content"
+msgid "Analysis of user behavior and popular content"
 msgstr ""
 
 #: Message.php:41
@@ -106,7 +109,7 @@ msgid ""
 msgstr ""
 
 #: Message.php:59
-msgid "Emphasis on human visitors."
+msgid "Emphasis on human visitors"
 msgstr ""
 
 #: Message.php:61
@@ -151,7 +154,7 @@ msgstr ""
 
 #: Message.php:80 Message.php:87 Message.php:97 Message.php:107 Message.php:119
 #: Message.php:126 Message.php:164
-msgid "bot_explain"
+msgid "bot-explain"
 msgstr ""
 
 #: Message.php:80

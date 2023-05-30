@@ -45,14 +45,14 @@ function get_messages() {
 }
 
 /**
- * Load the default percentage of each bot when activating the plugin.
+ * Load the default settings when activating the plugin.
  */
 function wcgu_activate() {
 	$bots = get_bots();
 
 	foreach ( $bots as $bot ) {
-		$setting_id = 'wcgu_' . strtolower( $bot['bot_name'] ) . '_status';
-		add_option( $setting_id, $bot[ __( 'default-percentage' ) ] );
+		$setting_id = 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status';
+		add_option( $setting_id, $bot['default_percentage'] );
 	}
 }
 register_activation_hook( __FILE__, 'wcgu_activate' );
@@ -77,7 +77,7 @@ function wcgu_check_user_agent( $bots, $user_agent ) {
 			}
 
 			if ( strpos( strtolower( $user_agent ), strtolower( $bot_user_agent ) ) !== false ) {
-				wp_cache_set( 'wcgu_detected_bot_name', $bot['bot_name'] );
+				wp_cache_set( 'gpt-welcomer_detected_bot_name', $bot['bot_name'] );
 				return;
 			}
 		}
@@ -101,11 +101,11 @@ add_action( 'init', 'wcgu_check_user_agent_wrapper' );
  * @param array $content is Article Text.
  */
 function customize_content( $content ) {
-	$detected_bot_name = wp_cache_get( 'wcgu_detected_bot_name' );
+	$detected_bot_name = wp_cache_get( 'gpt-welcomer_detected_bot_name' );
 
 	if ( ! empty( $detected_bot_name ) ) {
 		// Get the user status for the detected bot.
-		$user_status = get_option( 'wcgu_' . strtolower( $detected_bot_name ) . '_status', 100 );
+		$user_status = get_option( 'gpt-welcomer_' . strtolower( $detected_bot_name ) . '_status', 100 );
 		if ( 100 !== $user_status ) {
 			// Remove img tags from the content.
 			$content = preg_replace( '/<img[^>]+\>/i', '', $content );
@@ -117,7 +117,7 @@ function customize_content( $content ) {
 			$site_url   = get_bloginfo( 'url' );
 			$site_name  = get_bloginfo( 'name' );
 			$page_title = get_the_title();
-			$reason     = get_option( 'message_choice' );
+			$reason     = get_option( 'gpt-welcomer_message_choice' );
 			$content   .= '<p>' . sprintf( ' %s %s%s:%s%s.', $reason, "<a href='$site_url'>", $site_name, $page_title, '</a>' ) . '</p>';
 		}
 	}
@@ -158,14 +158,14 @@ function wcgu_settings_init() {
 	$bot_categories = array();
 
 	foreach ( $bots as $bot ) {
-		$setting_id = 'wcgu_' . strtolower( $bot['bot_name'] ) . '_status';
+		$setting_id = 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status';
 		register_setting( 'wcgu', $setting_id );
 
 		$bot_category = $bot['bot_category'];
 
 		if ( ! in_array( $bot_category, $bot_categories, true ) ) {
 			add_settings_section(
-				'wcgu_' . strtolower( $bot_category ) . '_section',
+				'gpt-welcomer_' . strtolower( $bot_category ) . '_section',
 				$bot_category . __( ' related BOT', 'gpt-welcomer' ),
 				'',
 				'wcgu'
@@ -174,7 +174,7 @@ function wcgu_settings_init() {
 		}
 
 		add_settings_section(
-			'wcgu_' . strtolower( $bot['bot_name'] ) . '_section',
+			'wcgu_' . strtolower( $bot['bot_key_name'] ) . '_section',
 			$bot['bot_name'] . ' ' . __( 'Settings', 'gpt-welcomer' ),
 			'wcgu_common_section_callback',
 			'wcgu',
@@ -182,12 +182,12 @@ function wcgu_settings_init() {
 		);
 
 		add_settings_field(
-			'wcgu_' . strtolower( $bot['bot_name'] ) . '_status',
+			'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status',
 			$bot['bot_name'] . __( ' Percentage of passing the text(0-100)', 'gpt-welcomer' ),
 			'wcgu_status_render',
 			'wcgu',
-			'wcgu_' . strtolower( $bot['bot_name'] ) . '_section',
-			array( 'label_for' => 'wcgu_' . strtolower( $bot['bot_name'] ) . '_status' )
+			'wcgu_' . strtolower( $bot['bot_key_name'] ) . '_section',
+			array( 'label_for' => 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status' )
 		);
 	}
 	$messages = get_messages();
@@ -202,20 +202,19 @@ function wcgu_settings_init() {
 
 	foreach ( $messages as $message ) {
 		$message_category = $message['message_category'];
-		$message_no       = $message['message'];
+		$message_text     = $message['message'];
 		add_settings_field(
-			'wcgu_message_' . strtolower( $message_no ),
-			'[' . $message_category . '] ' . $message_no,
+			'wcgu_message_' . strtolower( $message_text ),
+			'[' . $message_category . '] ' . $message_text,
 			'wcgu_message_field_callback',
 			'wcgu',
 			'wcgu_messages_section',
 			array(
-				'label_for' => 'wcgu_message_' . strtolower( $message_no ),
-				'name'      => 'message_choice',
-				'value'     => $message['message'],
+				'name'  => 'gpt-welcomer_message_choice',
+				'value' => $message_text,
 			)
 		);
-		register_setting( 'wcgu', 'message_choice' );
+		register_setting( 'wcgu', 'gpt-welcomer_message_choice' );
 	}
 }
 
@@ -234,15 +233,12 @@ function wcgu_message_section_callback( $args ) {
  * @param array $args is message name and value.
  */
 function wcgu_message_field_callback( $args ) {
-	$name    = esc_attr( $args['name'] );
-	$value   = esc_attr( $args['value'] );
-	$checked = esc_attr( checked( get_option( $name ), $value, false ) );
 	printf(
 		'<input type="radio" id="%1$s" name="%2$s" value="%3$s" %4$s>',
 		esc_attr( $args['value'] ),
 		esc_attr( $args['name'] ),
 		esc_attr( $args['value'] ),
-		esc_attr( checked( get_option( $name ), $value, false ) ),
+		esc_attr( checked( get_option( esc_attr( $args['name'] ) ), esc_attr( $args['value'] ), false ) ),
 	);
 }
 
@@ -263,6 +259,7 @@ function wcgu_common_section_callback( $args ) {
  */
 function wcgu_status_render( $args ) {
 	$option = get_option( $args['label_for'] );
+
 	?>
 	<select name="<?php echo esc_attr( $args['label_for'] ); ?>" style="width: 70px;">
 		<option value="0" <?php selected( $option, 0 ); ?>>0</option>

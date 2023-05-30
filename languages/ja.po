@@ -16,6 +16,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgid "gpt-welcomer is a WordPress plugin that limits content visibility for AI visitors like chatGPT or Bing AI bot, only a portion of the content is displayed in response."
+msgstr "gpt-welcomerを使うと訪問者がAIであった場合にコンテンツの全部を表示しないように設定できます。これにより、人間の訪問を促します。"
+
 #: Message.php:17 Message.php:175
 msgid "User selectable messages"
 msgstr "ユーザー選択メッセージ"
@@ -69,19 +72,19 @@ msgid ""
 "Page views by human viewers are a critical indicator for us. Therefore, we "
 "have placed restrictions on access by AI bots."
 msgstr ""
-"人間の閲覧者によるページビューは本サイトの重要な指標であります。"
+"人間の閲覧者によるページビューは本サイトの重要な指標です。"
 "そのため、AIボットのアクセスは制限させていただいております。"
 
 #: Message.php:39
-msgid "Analysis of user behavior-and-Popular-Content"
-msgstr "ユーザー行動パターンや人気コンテンツの分析"
+msgid "Analysis of user behavior and popular content"
+msgstr "ユーザーの行動パターンや人気コンテンツの分析"
 
 #: Message.php:41
 msgid ""
 "We limit access by AI bots in order to improve our service through the "
 "analysis of human visitor behavior."
 msgstr ""
-"人間の訪問者の行動分析を行ったサービスを向上させるため、AIボットのアクセスは制限しています。"
+"人間の訪問者の行動分析を行ってサービスを向上させるため、AIボットのアクセスは制限しています。"
 
 #: Message.php:44
 msgid "Unexpected security risks"
@@ -117,8 +120,8 @@ msgstr ""
 "当ウェブサイトのコンテンツは独自に作成されており、その価値を維持するためAIボットによる自動収集と学習、一部抜粋を制限しています。"
 
 #: Message.php:59
-msgid "Emphasis on human visitors."
-msgstr "人間を重視を強調"
+msgid "Emphasis on human visitors"
+msgstr "人間重視を強調"
 
 #: Message.php:61
 msgid ""
@@ -167,7 +170,7 @@ msgstr "パターン"
 
 #: Message.php:80 Message.php:87 Message.php:97 Message.php:107 Message.php:119
 #: Message.php:126 Message.php:164
-msgid "bot_explain"
+msgid "bot-explain"
 msgstr "ボットの説明"
 
 #: Message.php:80
