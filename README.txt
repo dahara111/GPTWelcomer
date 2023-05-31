@@ -1,7 +1,7 @@
 # gpt-welcomer
 Contributors: dahara111
 Tags: bot, spam, chatGPT, Bing AI, AI, Artificial Intelligence, robot, robots.txt
-Requires at least: 5.0
+Requires at least: 6.2
 Tested up to: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

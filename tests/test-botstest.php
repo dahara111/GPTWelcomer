@@ -6,7 +6,7 @@
  */
 
 require_once './tests/bootstrap.php';
-require_once './gpt-welcomer.php'; // Replace with the actual path to the PHP file containing the `get_bots` function
+require_once './gpt-welcomer.php'; // Replace with the actual path to the PHP file containing the `get_bots` function.
 
 /**
  * Bots test case.

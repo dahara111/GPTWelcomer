@@ -16,9 +16,8 @@
 ?>
 <?php
 
-require_once 'vendor/autoload.php';
-require_once plugin_dir_path( __FILE__ ) . 'class-useragent.php';
-require_once plugin_dir_path( __FILE__ ) . 'class-messagemanager.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-useragent.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-messagemanager.php';
 
 /**
  * Load the plugin text domain for translation.
