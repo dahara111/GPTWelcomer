@@ -64,7 +64,7 @@ Our goal with this plugin is to create a dialogue about how we can adapt to the 
 We see our plugin not as a rejection of AI, but as a tool to promote balance and ensure that the benefits of AI progress are equitably distributed. It may seem like a small step in the face of the vast changes AI brings, but we hope it will serve as a starting point for important discussions about our shared digital future.
 
 ## Change log
-2023/05/29
+2023/05/31
 Version 0.7
 First Release.
 
