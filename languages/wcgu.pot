@@ -218,8 +218,8 @@ msgstr ""
 
 #: Message.php:119
 msgid ""
-"Google's Bard is not restricted by default, as it does not have a web search "
-"function at this time."
+"Google is not restricted by default."
+"However, it may be necessary to restrict some categories in the future."
 msgstr ""
 
 #: Message.php:121
@@ -229,7 +229,7 @@ msgstr ""
 #: Message.php:126
 msgid ""
 "GoogleOtherBot is a bot for Google products other than Google Search,"
-" and it may be used for AI products, but we're looking at it now. "
+" and it may be used for AI products such as Bard, but we\'re looking at it now."
 msgstr ""
 
 

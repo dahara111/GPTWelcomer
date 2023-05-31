@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class BotsTest
  *
@@ -21,9 +20,10 @@ class BotsTest extends WP_UnitTestCase {
 		$expected_bots = [
 			[
 				'bot_category' => 'OpenAI',
-				'bot_name' => 'chatGPT-Web-Browsing',
+				'bot_name' => 'chatGPT Web Browsing',
 				'bot_explain' => __('Developed by openAI, chatGPT uses the browsing function to access the Internet, collect information, and respond directly to the user.', 'gpt-welcomer'),
-				'default-percentage' => 10,
+				'default_percentage' => 20,
+				'bot_key_name' => 'chatGPT_Web_Browsing',
 				'pattern' => ['ChatGPT-User']
 			]
 		];

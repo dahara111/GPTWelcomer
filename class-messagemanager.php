@@ -156,7 +156,7 @@ class MessageManager {
 						__( 'domain', 'gpt-welcomer' )  => array(
 							'.googlebot.com',
 						),
-						__( 'bot-explain', 'gpt-welcomer' ) => __( 'Google\'s Bard is not restricted by default, as it does not have a web search function at this time.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'Google is not restricted by default. However, it may be necessary to restrict some categories in the future.', 'gpt-welcomer' ),
 					),
 					'GoogleOtherBot' => array(
 						'bot-name' => __( 'GoogleOtherBot', 'gpt-welcomer' ),
@@ -164,7 +164,7 @@ class MessageManager {
 						__( 'pattern', 'gpt-welcomer' ) => array(
 							'GoogleOther',
 						),
-						__( 'bot-explain', 'gpt-welcomer' ) => __( 'GoogleOtherBot is a bot for Google products other than Google Search, and it may be used for AI products, but we\'re looking at it now.', 'gpt-welcomer' ),
+						__( 'bot-explain', 'gpt-welcomer' ) => __( 'GoogleOtherBot is a bot for Google products other than Google Search, and it may be used for AI products such as Bard, but we\'re looking at it now.', 'gpt-welcomer' ),
 					),
 				),
 			),

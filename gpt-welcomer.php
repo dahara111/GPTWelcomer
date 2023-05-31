@@ -77,7 +77,7 @@ function wcgu_check_user_agent( $bots, $user_agent ) {
 			}
 
 			if ( strpos( strtolower( $user_agent ), strtolower( $bot_user_agent ) ) !== false ) {
-				wp_cache_set( 'gpt-welcomer_detected_bot_name', $bot['bot_name'] );
+				wp_cache_set( 'gpt-welcomer_detected_bot_name', $bot['bot_key_name'] );
 				return;
 			}
 		}
@@ -86,10 +86,12 @@ function wcgu_check_user_agent( $bots, $user_agent ) {
 
 /**
  * Wrapper functions for PHPUnit.
+ *
+ * @param string $user_agent is user agent string for testcase.
  */
-function wcgu_check_user_agent_wrapper() {
+function wcgu_check_user_agent_wrapper( $user_agent = '' ) {
 	$bots           = get_bots();
-	$user_agent_obj = new UserAgent( '' );
+	$user_agent_obj = new UserAgent( $user_agent );
 	$user_agent     = $user_agent_obj->get_user_agent();
 	wcgu_check_user_agent( $bots, $user_agent );
 }
@@ -102,17 +104,17 @@ add_action( 'init', 'wcgu_check_user_agent_wrapper' );
  */
 function customize_content( $content ) {
 	$detected_bot_name = wp_cache_get( 'gpt-welcomer_detected_bot_name' );
-
 	if ( ! empty( $detected_bot_name ) ) {
 		// Get the user status for the detected bot.
 		$user_status = get_option( 'gpt-welcomer_' . strtolower( $detected_bot_name ) . '_status', 100 );
-		if ( 100 !== $user_status ) {
+		if ( "100" !== $user_status ) {
 			// Remove img tags from the content.
 			$content = preg_replace( '/<img[^>]+\>/i', '', $content );
 			// Calculate the percentage of content to show.
 			$content_to_show = round( strlen( $content ) * $user_status / 100 );
 			// Trim the content.
 			$content = substr( $content, 0, $content_to_show );
+
 			// Add a link to the full content.
 			$site_url   = get_bloginfo( 'url' );
 			$site_name  = get_bloginfo( 'name' );

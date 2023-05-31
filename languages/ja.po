@@ -243,10 +243,10 @@ msgstr "domain"
 
 #: Message.php:119
 msgid ""
-"Google's Bard is not restricted by default, as it does not have a web search "
-"function at this time."
+"Google is not restricted by default."
+"However, it may be necessary to restrict some categories in the future."
 msgstr ""
-"現時点では Google Bard には Web 検索機能がないため、デフォルトでは制限していません。"
+"Googleはデフォルトで制限されていません。ただし、将来的に一部のカテゴリを制限する必要が生じる可能性があります。"
 
 #: Message.php:121
 msgid "GoogleOtherBot"
@@ -255,9 +255,9 @@ msgstr "Googleのその他のBot"
 #: Message.php:126
 msgid ""
 "GoogleOtherBot is a bot for Google products other than Google Search,"
-" and it may be used for AI products, but we're looking at it now."
+" and it may be used for AI products such as Bard, but we\'re looking at it now."
 msgstr ""
-"GoogleOtherBot は Google 検索以外の Google 製品用のボットであり、AI 製品に使用される可能性もありますが現在は様子を見ています。"
+"GoogleOtherBotはGoogle検索以外のGoogle製品向けのボットです。BardなどのAI製品に使われている可能性もありますが、現在は制限していません。"
 
 #: gpt-welcomer.php:105
 msgid "Plugin Settings"
