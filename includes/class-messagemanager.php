@@ -110,16 +110,16 @@ class MessageManager {
 				__( 'OpenAI', 'gpt-welcomer' )    => array(
 					'chatGPT Web Browsing' => array(
 						'bot-name' => __( 'chatGPT Web Browsing', 'gpt-welcomer' ),
-						__( 'default-percentage', 'gpt-welcomer' ) => 20,
-						__( 'pattern', 'gpt-welcomer' ) => array(
+						'default-percentage' => '20',
+						'pattern' => array(
 							'ChatGPT-User',
 						),
 						__( 'bot-explain', 'gpt-welcomer' ) => __( 'Developed by openAI, chatGPT uses the browsing function to access the Internet, collect information, and respond directly to the user.', 'gpt-welcomer' ),
 					),
 					'chatGPT plugin xxx' => array(
 						'bot-name' => __( 'chatGPT plugin xxx', 'gpt-welcomer' ),
-						__( 'default-percentage', 'gpt-welcomer' ) => 20,
-						__( 'pattern', 'gpt-welcomer' ) => array(
+						'default-percentage' => '20',
+						'pattern' => array(
 							'',
 						),
 						__( 'bot-explain', 'gpt-welcomer' ) => __( 'There are plug-ins provided by third parties for chatGPT that access the Internet, collect information, and respond directly to the user; These can\'t be at this time because they pretend to be human by spoofing the UserAgent.', 'gpt-welcomer' ),
@@ -128,8 +128,8 @@ class MessageManager {
 				__( 'OtherBot', 'gpt-welcomer' )  => array(
 					'Common Crawl' => array(
 						'bot-name' => __( 'Common Crawl', 'gpt-welcomer' ),
-						__( 'default-percentage', 'gpt-welcomer' ) => 10,
-						__( 'pattern', 'gpt-welcomer' ) => array(
+						'default-percentage' => '10',
+						'pattern' => array(
 							'CCBot',
 						),
 						__( 'bot-explain', 'gpt-welcomer' ) => __( 'CommonCrawl will access the Internet to collect information and provide it to various AIs, including commercial ones. No data source citations or revenue returns will be provided.', 'gpt-welcomer' ),
@@ -138,8 +138,8 @@ class MessageManager {
 				__( 'Microsoft', 'gpt-welcomer' ) => array(
 					'Bingbot' => array(
 						'bot-name' => __( 'Bingbot', 'gpt-welcomer' ),
-						__( 'default-percentage', 'gpt-welcomer' ) => 20,
-						__( 'pattern', 'gpt-welcomer' ) => array(
+						'default-percentage' => '20',
+						'pattern' => array(
 							'MicrosoftPreview',
 							'bingbot',
 						),
@@ -149,19 +149,19 @@ class MessageManager {
 				__( 'Google', 'gpt-welcomer' )    => array(
 					'Googlebot' => array(
 						'bot-name' => __( 'Googlebot', 'gpt-welcomer' ),
-						__( 'default-percentage', 'gpt-welcomer' ) => 100,
-						__( 'pattern', 'gpt-welcomer' ) => array(
+						'default-percentage' => '100',
+						'pattern' => array(
 							'Googlebot',
 						),
-						__( 'domain', 'gpt-welcomer' )  => array(
+						'domain'  => array(
 							'.googlebot.com',
 						),
 						__( 'bot-explain', 'gpt-welcomer' ) => __( 'Google is not restricted by default. However, it may be necessary to restrict some categories in the future.', 'gpt-welcomer' ),
 					),
 					'GoogleOtherBot' => array(
 						'bot-name' => __( 'GoogleOtherBot', 'gpt-welcomer' ),
-						__( 'default-percentage', 'gpt-welcomer' ) => 100,
-						__( 'pattern', 'gpt-welcomer' ) => array(
+						'default-percentage' => '100',
+						'pattern' => array(
 							'GoogleOther',
 						),
 						__( 'bot-explain', 'gpt-welcomer' ) => __( 'GoogleOtherBot is a bot for Google products other than Google Search, and it may be used for AI products such as Bard, but we\'re looking at it now.', 'gpt-welcomer' ),
@@ -217,14 +217,15 @@ class MessageManager {
 		$bots_data = $this->data[ __( 'Bot information', 'gpt-welcomer' ) ];
 
 		foreach ( $bots_data as $bot_category => $bots_array ) {
+			#var_dump($bots_array);
 			foreach ( $bots_array as $bot_name => $bot_data ) {
 				$bot                       = array();
 				$bot['bot_category']       = $bot_category;
-				$bot['bot_key_name']       = preg_replace( '/[^a-zA-Z0-9]/', '_', $bot_name );
+				$bot['bot_key_name']       = strtolower( preg_replace( '/[^a-zA-Z0-9]/', '_', $bot_name ));
 				$bot['bot_name']           = $bot_data[ __( 'bot-name', 'gpt-welcomer' ) ];
 				$bot['bot_explain']        = $bot_data[ __( 'bot-explain', 'gpt-welcomer' ) ];
-				$bot['default_percentage'] = $bot_data[ __( 'default-percentage', 'gpt-welcomer' ) ];
-				$bot['pattern']            = $bot_data[ __( 'pattern', 'gpt-welcomer' ) ];
+				$bot['default_percentage'] = $bot_data[ 'default-percentage' ];
+				$bot['pattern']            = $bot_data[ 'pattern' ];
 				$bots[]                    = $bot;
 			}
 		}

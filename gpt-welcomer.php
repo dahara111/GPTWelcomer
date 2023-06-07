@@ -3,7 +3,7 @@
  * Plugin Name: gpt-welcomer
  * Plugin URI: https://github.com/dahara111/gpt-welcomer
  * Description: gpt-welcomer is a WordPress plugin that limits content visibility for AI visitors like chatGPT or Bing AI bot, only a portion of the content is displayed in response.
- * Version: 0.7
+ * Version: 0.71
  * Author: dahara111
  * Author URI: https://github.com/dahara111/
  * License: GPL2
@@ -18,6 +18,7 @@
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-useragent.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-messagemanager.php';
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 /**
  * Load the plugin text domain for translation.
@@ -52,10 +53,35 @@ function wcgu_activate() {
 	foreach ( $bots as $bot ) {
 		$setting_id = 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status';
 		add_option( $setting_id, $bot['default_percentage'] );
+
+		// For WP Total Cache.
+		if ( is_plugin_active( 'w3-total-cache/w3-total-cache.php') ){
+			#add_action( "update_option_" . $setting_id, 'wcgu_update_w3tc_on_my_plugin_change', 10, 3 );
+			#error_log("set update_option: update_option_" . $setting_id);
+			#do_action("update_option_" . $setting_id, $setting_id, "20", "30");
+
+			if ( '100' !== $bot['default_percentage'] and ! empty( $bot['pattern'] )  ) {
+				$config = new W3_Config();
+				$reject_ua = $config->get_array( 'pgcache.reject.ua' );
+				$reject_ua = array_merge($reject_ua, $bot['pattern']);
+				$reject_ua = array_filter($reject_ua);
+				$reject_ua = array_unique($reject_ua);
+				$config->set( 'pgcache.reject.ua', $reject_ua );
+				$config->save();
+			}
+		}
 	}
 }
 register_activation_hook( __FILE__, 'wcgu_activate' );
 
+// For WP Total Cache.
+if ( is_plugin_active( 'w3-total-cache/w3-total-cache.php') ){
+	$bots = get_bots();
+	foreach ( $bots as $bot ) {
+		$setting_id = 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status';
+		add_action( "update_option_" . $setting_id, 'wcgu_update_w3tc_on_my_plugin_change', 10, 3 );
+	}
+}
 
 /**
  * Load the default percentage of each bot when activating the plugin.
@@ -106,7 +132,7 @@ function customize_content( $content ) {
 	if ( ! empty( $detected_bot_name ) ) {
 		// Get the user status for the detected bot.
 		$user_status = get_option( 'gpt-welcomer_' . strtolower( $detected_bot_name ) . '_status', 100 );
-		if ( "100" !== $user_status ) {
+		if ( '100' !== $user_status ) {
 			// Remove img tags from the content.
 			$content = preg_replace( '/<img[^>]+\>/i', '', $content );
 			// Calculate the percentage of content to show.
@@ -126,10 +152,6 @@ function customize_content( $content ) {
 }
 add_filter( 'the_content', 'customize_content' );
 
-add_action( 'admin_menu', 'wcgu_add_admin_menu' );
-add_action( 'admin_init', 'wcgu_settings_init' );
-
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'add_plugin_page_settings_link' );
 
 /**
  * Set setting page link.
@@ -142,6 +164,8 @@ function add_plugin_page_settings_link( $links ) {
 		'">' . __( 'Plugin Settings' ) . '</a>';
 	return $links;
 }
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'add_plugin_page_settings_link' );
+
 
 /**
  * Create new top-level menu.
@@ -149,6 +173,7 @@ function add_plugin_page_settings_link( $links ) {
 function wcgu_add_admin_menu() {
 	add_options_page( 'gpt-welcomer settings', 'gpt-welcomer settings', 'manage_options', 'wcgu', 'wcgu_options_page' );
 }
+add_action( 'admin_menu', 'wcgu_add_admin_menu' );
 
 /**
  * Function to initialize the configuration page.
@@ -218,6 +243,7 @@ function wcgu_settings_init() {
 		register_setting( 'wcgu', 'gpt-welcomer_message_choice' );
 	}
 }
+add_action( 'admin_init', 'wcgu_settings_init' );
 
 /**
  * SELECT tag to set the percentage of content to be shown.
@@ -299,6 +325,86 @@ function wcgu_options_page() {
 	<?php
 }
 
+/**
+ * Change WP Total Cache Settings.
+ * 
+ */
+function wcgu_update_w3tc_on_my_plugin_change( $old_value, $new_value, $option  ) {
+
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+	error_log("wcgu_update_w3tc_on_my_plugin_change");
+    if ( is_plugin_active( 'w3-total-cache/w3-total-cache.php' ) ) {
+
+		#error_log("wcgu_update_w3tc_on_my_plugin_change if");
+
+        $config = new W3_Config();
+        $reject_ua = $config->get_array('pgcache.reject.ua');
+
+        $current_hook = current_filter();
+        $bot_name = str_replace( array('update_option_gpt-welcomer_', '_status'), '', $current_hook );
+		$bots = get_bots();
+	
+		foreach ( $bots as $bot ) {
+			#error_log("normal log:" .$bot_name . "-". $bot['bot_key_name']);
+			if ( $bot_name !== $bot['bot_key_name'] ){
+				#error_log("log:" .$bot_name . "-". $bot['bot_key_name']);
+				continue;
+			}
+
+
+			$bot_pattern = $bot['pattern'];
+			$errorJson = json_encode( $bot_pattern );
+			error_log("bot_pattern" . $errorJson);
+			error_log("new_value" . $new_value);
+			error_log("old_value" . $old_value);
+			error_log("option" . $option);
+
+			if ( '100' !== $new_value and ! empty( $bot_pattern )  ) {
+				
+				// $errorJson = json_encode($reject_ua );
+				// error_log($errorJson);
+				// $type = gettype($bot_pattern);
+				// error_log("bot pattern" . $type);
+				// $type = gettype($reject_ua,);
+				// error_log("reject_ua type" . $type);
+
+				// $errorJson = json_encode($reject_ua );
+				// error_log("reject_ua1" .$errorJson);
+
+				#foreach ($bot_pattern as $subArray) {
+				#	$reject_ua = array_merge($reject_ua, $subArray);
+				#}
+				$reject_ua = array_merge($reject_ua, $bot_pattern);
+
+				$errorJson = json_encode($reject_ua);
+				error_log("reject_ua2" .$errorJson);
+
+				$reject_ua = array_unique($reject_ua);
+				$errorJson = json_encode($reject_ua);
+				error_log("reject_ua3" .$errorJson);
+
+			}else{
+				if ($bot_pattern !== null){
+					$reject_ua = array_diff($reject_ua, $bot_pattern);
+				}
+			}
+
+			$config->set('pgcache.reject.ua', $reject_ua);
+			$config->save();
+			break;
+		}
+	}
+}
+
+
+add_action( 'updated_option', 'my_option_update_logger', 10, 3 );
+
+function my_option_update_logger( $option, $old_value, $new_value ) {
+    error_log( "Option updated: " . $option );
+    error_log( "Old value: " . print_r($old_value, true) );
+    error_log( "New value: " . print_r($new_value, true) );
+}
 
 /**
  * Add extra header.
@@ -321,4 +427,6 @@ function add_x_robots_tag_header() {
 	header( 'X-Robots-Tag: ' . $header_value );
 }
 add_action( 'wp_head', 'add_x_robots_tag_header' );
+
+
 
