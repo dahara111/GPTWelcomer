@@ -9,7 +9,7 @@
 
 ?>
 <?php
-
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
 
 if ( ! function_exists( '__' ) ) {
 	/**
@@ -217,15 +217,14 @@ class MessageManager {
 		$bots_data = $this->data[ __( 'Bot information', 'gpt-welcomer' ) ];
 
 		foreach ( $bots_data as $bot_category => $bots_array ) {
-			#var_dump($bots_array);
 			foreach ( $bots_array as $bot_name => $bot_data ) {
 				$bot                       = array();
 				$bot['bot_category']       = $bot_category;
 				$bot['bot_key_name']       = strtolower( preg_replace( '/[^a-zA-Z0-9]/', '_', $bot_name ));
 				$bot['bot_name']           = $bot_data[ __( 'bot-name', 'gpt-welcomer' ) ];
 				$bot['bot_explain']        = $bot_data[ __( 'bot-explain', 'gpt-welcomer' ) ];
-				$bot['default_percentage'] = $bot_data[ 'default-percentage' ];
-				$bot['pattern']            = $bot_data[ 'pattern' ];
+				$bot['default_percentage'] = $bot_data['default-percentage'];
+				$bot['pattern']            = $bot_data['pattern'];
 				$bots[]                    = $bot;
 			}
 		}

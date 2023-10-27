@@ -16,6 +16,8 @@
 ?>
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly      
+
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-useragent.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-messagemanager.php';
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -23,15 +25,15 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 /**
  * Load the plugin text domain for translation.
  */
-function myplugin_load_textdomain() {
+function wcgu_load_textdomain() {
 	load_plugin_textdomain( 'gpt-welcomer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'plugins_loaded', 'myplugin_load_textdomain' );
+add_action( 'plugins_loaded', 'wcgu_load_textdomain' );
 
 /**
  * Get bot information from Message.php.
  */
-function get_bots() {
+function wcgu_get_bots() {
 	$message_manager = new MessageManager();
 	return $message_manager->get_bots();
 }
@@ -39,7 +41,7 @@ function get_bots() {
 /**
  * Get User selectable message from Message.php.
  */
-function get_messages() {
+function wcgu_get_messages() {
 	$message_manager = new MessageManager();
 	return $message_manager->get_messages();
 }
@@ -48,7 +50,7 @@ function get_messages() {
  * Load the default settings when activating the plugin.
  */
 function wcgu_activate() {
-	$bots = get_bots();
+	$bots = wcgu_get_bots();
 
 	foreach ( $bots as $bot ) {
 		$setting_id = 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status';
@@ -76,7 +78,7 @@ register_activation_hook( __FILE__, 'wcgu_activate' );
 
 // For WP Total Cache.
 if ( is_plugin_active( 'w3-total-cache/w3-total-cache.php') ){
-	$bots = get_bots();
+	$bots = wcgu_get_bots();
 	foreach ( $bots as $bot ) {
 		$setting_id = 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status';
 		add_action( "update_option_" . $setting_id, 'wcgu_update_w3tc_on_my_plugin_change', 10, 3 );
@@ -115,7 +117,7 @@ function wcgu_check_user_agent( $bots, $user_agent ) {
  * @param string $user_agent is user agent string for testcase.
  */
 function wcgu_check_user_agent_wrapper( $user_agent = '' ) {
-	$bots           = get_bots();
+	$bots           = wcgu_get_bots();
 	$user_agent_obj = new UserAgent( $user_agent );
 	$user_agent     = $user_agent_obj->get_user_agent();
 	wcgu_check_user_agent( $bots, $user_agent );
@@ -127,7 +129,7 @@ add_action( 'init', 'wcgu_check_user_agent_wrapper' );
  *
  * @param array $content is Article Text.
  */
-function customize_content( $content ) {
+function wcgu_customize_content( $content ) {
 	$detected_bot_name = wp_cache_get( 'gpt-welcomer_detected_bot_name' );
 	if ( ! empty( $detected_bot_name ) ) {
 		// Get the user status for the detected bot.
@@ -150,7 +152,7 @@ function customize_content( $content ) {
 	}
 	return $content;
 }
-add_filter( 'the_content', 'customize_content' );
+add_filter( 'the_content', 'wcgu_customize_content' );
 
 
 /**
@@ -158,13 +160,13 @@ add_filter( 'the_content', 'customize_content' );
  *
  * @param array $links is not used.
  */
-function add_plugin_page_settings_link( $links ) {
+function wcgu_add_plugin_page_settings_link( $links ) {
 	$links[] = '<a href="' .
 		admin_url( 'options-general.php?page=wcgu' ) .
 		'">' . __( 'Plugin Settings' ) . '</a>';
 	return $links;
 }
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'add_plugin_page_settings_link' );
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'wcgu_add_plugin_page_settings_link' );
 
 
 /**
@@ -180,7 +182,7 @@ add_action( 'admin_menu', 'wcgu_add_admin_menu' );
  */
 function wcgu_settings_init() {
 
-	$bots           = get_bots();
+	$bots           = wcgu_get_bots();
 	$bot_categories = array();
 
 	foreach ( $bots as $bot ) {
@@ -216,7 +218,7 @@ function wcgu_settings_init() {
 			array( 'label_for' => 'gpt-welcomer_' . strtolower( $bot['bot_key_name'] ) . '_status' )
 		);
 	}
-	$messages = get_messages();
+	$messages = wcgu_get_messages();
 
 	add_settings_section(
 		'wcgu_messages_section',
@@ -333,10 +335,7 @@ function wcgu_update_w3tc_on_my_plugin_change( $old_value, $new_value, $option  
 
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-	error_log("wcgu_update_w3tc_on_my_plugin_change");
     if ( is_plugin_active( 'w3-total-cache/w3-total-cache.php' ) ) {
-
-		#error_log("wcgu_update_w3tc_on_my_plugin_change if");
 
         $config = new W3_Config();
         $reject_ua = $config->get_array('pgcache.reject.ua');
@@ -410,7 +409,7 @@ function my_option_update_logger( $option, $old_value, $new_value ) {
  * Add extra header.
  * Because some image collection bots ignore robots.txt and require their own headers
  */
-function add_x_robots_tag_header() {
+function wcgu_add_x_robots_tag_header() {
 	$tags = array(
 		'noai',
 		'noindex',
@@ -426,7 +425,7 @@ function add_x_robots_tag_header() {
 
 	header( 'X-Robots-Tag: ' . $header_value );
 }
-add_action( 'wp_head', 'add_x_robots_tag_header' );
+add_action( 'wp_head', 'wcgu_add_x_robots_tag_header' );
 
 
 
