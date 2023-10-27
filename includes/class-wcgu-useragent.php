@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Class UserAgent
  * to avoid global variables and test case.
  */
-class UserAgent {
+class Wcgu_UserAgent {
 
 	/**
 	 * A variable to store UserAgent text.

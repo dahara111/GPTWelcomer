@@ -27,7 +27,7 @@ if ( ! function_exists( '__' ) ) {
  * Class MessageManager
  * Aggregate messages for internationalization.
  */
-class MessageManager {
+class Wcgu_MessageManager {
 	/**
 	 * A variable to store all messages.
 	 *

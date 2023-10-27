@@ -3,7 +3,7 @@
  * Plugin Name: gpt-welcomer
  * Plugin URI: https://github.com/dahara111/gpt-welcomer
  * Description: gpt-welcomer is a WordPress plugin that limits content visibility for AI visitors like chatGPT or Bing AI bot, only a portion of the content is displayed in response.
- * Version: 0.71
+ * Version: 0.7.2
  * Author: dahara111
  * Author URI: https://github.com/dahara111/
  * License: GPL2
@@ -18,8 +18,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly      
 
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-useragent.php';
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-messagemanager.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wcgu-useragent.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wcgu-messagemanager.php';
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 /**
@@ -34,7 +34,7 @@ add_action( 'plugins_loaded', 'wcgu_load_textdomain' );
  * Get bot information from Message.php.
  */
 function wcgu_get_bots() {
-	$message_manager = new MessageManager();
+	$message_manager = new Wcgu_MessageManager();
 	return $message_manager->get_bots();
 }
 
@@ -42,7 +42,7 @@ function wcgu_get_bots() {
  * Get User selectable message from Message.php.
  */
 function wcgu_get_messages() {
-	$message_manager = new MessageManager();
+	$message_manager = new Wcgu_MessageManager();
 	return $message_manager->get_messages();
 }
 
@@ -118,7 +118,7 @@ function wcgu_check_user_agent( $bots, $user_agent ) {
  */
 function wcgu_check_user_agent_wrapper( $user_agent = '' ) {
 	$bots           = wcgu_get_bots();
-	$user_agent_obj = new UserAgent( $user_agent );
+	$user_agent_obj = new Wcgu_UserAgent( $user_agent );
 	$user_agent     = $user_agent_obj->get_user_agent();
 	wcgu_check_user_agent( $bots, $user_agent );
 }
@@ -342,7 +342,7 @@ function wcgu_update_w3tc_on_my_plugin_change( $old_value, $new_value, $option  
 
         $current_hook = current_filter();
         $bot_name = str_replace( array('update_option_gpt-welcomer_', '_status'), '', $current_hook );
-		$bots = get_bots();
+		$bots = wcgu_get_bots();
 	
 		foreach ( $bots as $bot ) {
 			#error_log("normal log:" .$bot_name . "-". $bot['bot_key_name']);
