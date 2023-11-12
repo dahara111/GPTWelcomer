@@ -3,10 +3,16 @@
 /.phpunit.result.cache
 /phpunit.xml.bak
 /.env
-/vendor
 /bin
 /memo.txt
 /make_yaml.php
 /bots.yaml
 /User-Selectable-Messages.yaml
 /Bot-information.yaml 
+/tests
+/.env.example
+/.phpcs.xml.dist
+/.phpunit.result.cache
+/.travis.yml
+/Dockerfile
+/docker-compose.yml*
