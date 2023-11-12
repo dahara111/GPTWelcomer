@@ -255,7 +255,7 @@ msgstr "Googleのその他のBot"
 #: Message.php:126
 msgid ""
 "GoogleOtherBot is a bot for Google products other than Google Search,"
-" and it may be used for AI products such as Bard, but we\'re looking at it now."
+" and it may be used for AI products such as Bard, but we're looking at it now."
 msgstr ""
 "GoogleOtherBotはGoogle検索以外のGoogle製品向けのボットです。BardなどのAI製品に使われている可能性もありますが、現在は制限していません。"
 
