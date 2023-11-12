@@ -2,6 +2,8 @@
 Contributors: dahara111
 Tags: bot, spam, chatGPT, Bing AI, AI, Artificial Intelligence, robot, robots.txt
 Requires at least: 6.2
+Requires PHP: 8.1
+Stable tag: 0.7.3
 Tested up to: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -74,3 +76,6 @@ A6. このプラグインとラッダイト運動との類似点を指摘する�
 バージョン0.7.2
 Readme、命名規則対応等
 
+2023/11/12
+Version 0.7.3
+テストケース修正

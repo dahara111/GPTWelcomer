@@ -4,7 +4,7 @@ Tags: bot, spam, chatGPT, bingbot, googlebot, Bing AI, AI, Artificial Intelligen
 Requires at least: 6.2
 Tested up to: 6.2
 Requires PHP: 8.1
-Stable tag: 0.7.2
+Stable tag: 0.7.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,3 +71,7 @@ First Release.
 2023/10/27
 Version 0.7.2
 Fix Readme.txt and other format.
+
+2023/11/12
+Version 0.7.3
+Fix test case.
