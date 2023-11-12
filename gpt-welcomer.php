@@ -397,9 +397,9 @@ function wcgu_update_w3tc_on_my_plugin_change( $old_value, $new_value, $option  
 }
 
 
-add_action( 'updated_option', 'my_option_update_logger', 10, 3 );
+add_action( 'updated_option', 'wcgu_my_option_update_logger', 10, 3 );
 
-function my_option_update_logger( $option, $old_value, $new_value ) {
+function wcgu_my_option_update_logger( $option, $old_value, $new_value ) {
     error_log( "Option updated: " . $option );
     error_log( "Old value: " . print_r($old_value, true) );
     error_log( "New value: " . print_r($new_value, true) );

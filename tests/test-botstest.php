@@ -22,13 +22,13 @@ class BotsTest extends WP_UnitTestCase {
 				'bot_category' => 'OpenAI',
 				'bot_name' => 'chatGPT Web Browsing',
 				'bot_explain' => __('Developed by openAI, chatGPT uses the browsing function to access the Internet, collect information, and respond directly to the user.', 'gpt-welcomer'),
-				'default_percentage' => 20,
-				'bot_key_name' => 'chatGPT_Web_Browsing',
+				'default_percentage' => '20',
+				'bot_key_name' => 'chatgpt_web_browsing',
 				'pattern' => ['ChatGPT-User']
 			]
 		];
 
-		$actual_bots = get_bots();
+		$actual_bots = wcgu_get_bots();
 		$this->assertEquals($expected_bots, [$actual_bots[0]]);
 	}
 }

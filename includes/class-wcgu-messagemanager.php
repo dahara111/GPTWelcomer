@@ -11,18 +11,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
 
-if ( ! function_exists( '__' ) ) {
-	/**
-	 * To allow testing outside of WordPress.
-	 *
-	 * @param string $text is text to print.
-	 * @param string $domain is text domain.
-	 */
-	function __( $text, $domain ) {
-		return $text;
-	}
-}
-
 /**
  * Class MessageManager
  * Aggregate messages for internationalization.

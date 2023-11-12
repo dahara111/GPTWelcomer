@@ -6,6 +6,7 @@
  */
 
 require_once './tests/bootstrap.php';
+
 /**
  * Sample test case.
  */
