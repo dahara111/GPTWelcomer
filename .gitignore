@@ -16,3 +16,4 @@
 /.travis.yml
 /Dockerfile
 /docker-compose.yml*
+/.travis.yml
